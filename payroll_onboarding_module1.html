@@ -1,0 +1,242 @@
+
+<h2 class="sr-only">Payroll onboarding module 1 — welcome and overview of the weekly payroll cycle at Resinc</h2>
+
+<style>
+.po { font-family: var(--font-sans); padding: 0.5rem 0 2rem; }
+.po-video { background: #0A3542; border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+.po-play { width: 48px; height: 48px; border-radius: 50%; background: #00AEEF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: none; cursor: pointer; }
+.po-video-title { color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+.po-video-sub { color: rgba(255,255,255,.5); font-size: 12px; line-height: 1.5; }
+
+.po-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #00AEEF; margin-bottom: 6px; }
+.po-section-title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; line-height: 1.3; }
+.po-section-sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.25rem; line-height: 1.6; }
+.po-section { margin-bottom: 2rem; }
+
+.po-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 2rem; }
+.po-stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; }
+.po-stat-val { font-size: 26px; font-weight: 500; color: #00AEEF; line-height: 1; margin-bottom: 4px; }
+.po-stat-lbl { font-size: 12px; color: var(--color-text-secondary); line-height: 1.4; }
+
+.po-divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.75rem 0; }
+
+.po-timeline { display: flex; flex-direction: column; gap: 0; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: 2rem; }
+.po-day { display: flex; align-items: stretch; border-bottom: 0.5px solid var(--color-border-tertiary); cursor: pointer; transition: background .15s; }
+.po-day:last-child { border-bottom: none; }
+.po-day:hover { background: var(--color-background-secondary); }
+.po-day.active { background: var(--color-background-info); }
+.po-day-label { width: 110px; flex-shrink: 0; padding: 10px 14px; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); display: flex; flex-direction: column; justify-content: center; border-right: 0.5px solid var(--color-border-tertiary); }
+.po-day.active .po-day-label { color: var(--color-text-info); }
+.po-day-sub { font-size: 10px; opacity: .6; font-weight: 400; margin-top: 1px; }
+.po-day-tasks { flex: 1; padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.po-chip { font-size: 11px; padding: 3px 10px; border-radius: 999px; font-weight: 500; white-space: nowrap; }
+.po-chip.payroll { background: var(--color-background-info); color: var(--color-text-info); }
+.po-chip.commission { background: #F5F3FF; color: #534AB7; }
+.po-chip.accounts { background: #FFFBEB; color: #854F0B; }
+.po-chip.approval { background: var(--color-background-success); color: var(--color-text-success); }
+.po-chip.done { background: var(--color-background-success); color: var(--color-text-success); font-weight: 500; }
+.po-day-detail { padding: 10px 14px 12px; border-top: 0.5px solid var(--color-border-tertiary); font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.6; display: none; }
+.po-day-detail.open { display: block; }
+
+.po-roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 2rem; }
+.po-role-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem; cursor: pointer; transition: border-color .15s; }
+.po-role-card:hover { border-color: var(--color-border-secondary); }
+.po-role-card.active { border-color: #00AEEF; background: var(--color-background-secondary); }
+.po-role-icon { width: 32px; height: 32px; border-radius: var(--border-radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 16px; }
+.po-role-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+.po-role-title { font-size: 11px; color: var(--color-text-secondary); }
+.po-role-detail { margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary); font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; display: none; }
+.po-role-detail.open { display: block; }
+
+.po-callout { background: #0A3542; border-radius: var(--border-radius-lg); padding: 1.1rem 1.25rem; margin-bottom: 2rem; }
+.po-callout-eye { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #00AEEF; margin-bottom: 6px; }
+.po-callout-body { font-size: 13px; color: rgba(255,255,255,.85); line-height: 1.7; font-style: italic; }
+
+.po-quiz { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: 1.5rem; }
+.po-quiz-hdr { background: var(--color-background-secondary); padding: .75rem 1.1rem; font-size: 12px; font-weight: 500; color: var(--color-text-secondary); display: flex; align-items: center; gap: 8px; }
+.po-q { padding: 1rem 1.1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.po-q:last-child { border-bottom: none; }
+.po-q-text { font-size: 14px; color: var(--color-text-primary); font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
+.po-opt { display: block; width: 100%; text-align: left; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 9px 12px; margin-bottom: 6px; font-size: 13px; color: var(--color-text-primary); cursor: pointer; font-family: var(--font-sans); transition: all .15s; }
+.po-opt:hover:not(:disabled) { background: var(--color-background-secondary); }
+.po-opt.correct { background: var(--color-background-success); border-color: var(--color-border-success); color: var(--color-text-success); }
+.po-opt.wrong { background: var(--color-background-danger); border-color: var(--color-border-danger); color: var(--color-text-danger); }
+.po-opt:disabled { cursor: default; }
+.po-fb { font-size: 12px; margin-top: 8px; padding: 8px 10px; border-radius: var(--border-radius-md); display: none; line-height: 1.5; }
+.po-fb.show { display: block; }
+.po-fb.ok { background: var(--color-background-success); color: var(--color-text-success); }
+.po-fb.bad { background: var(--color-background-danger); color: var(--color-text-danger); }
+</style>
+
+<div class="po">
+
+<div class="po-video">
+  <button class="po-play" aria-label="Play introduction video">
+    <i class="ti ti-player-play" style="font-size:20px;color:white;" aria-hidden="true"></i>
+  </button>
+  <div>
+    <div class="po-video-title">Welcome to payroll at Resinc</div>
+    <div class="po-video-sub">Watch this first. Covers what payroll is, why it matters, and what your week looks like. Insert Synthesia or Vyond video link here.</div>
+  </div>
+</div>
+
+<div class="po-section">
+  <div class="po-eyebrow">The big picture</div>
+  <div class="po-section-title">What payroll means at Resinc</div>
+  <div class="po-section-sub">Every Friday at 10am, every Resinc employee gets paid. Getting there takes a full week of work — and it starts on Friday the week before. This module gives you the full picture before you touch anything.</div>
+
+  <div class="po-stats">
+    <div class="po-stat"><div class="po-stat-val">~150</div><div class="po-stat-lbl">Employees paid every Friday</div></div>
+    <div class="po-stat"><div class="po-stat-val">6</div><div class="po-stat-lbl">Work instructions covering the full cycle</div></div>
+    <div class="po-stat"><div class="po-stat-val">19</div><div class="po-stat-lbl">Electricians on manual invoices</div></div>
+    <div class="po-stat"><div class="po-stat-val">10am</div><div class="po-stat-lbl">Friday payment deadline — every week</div></div>
+  </div>
+</div>
+
+<hr class="po-divider">
+
+<div class="po-section">
+  <div class="po-eyebrow">Weekly schedule — click each day</div>
+  <div class="po-section-title">What happens every week</div>
+  <div class="po-section-sub">Payroll runs on a fixed weekly cycle. Click any day to see what happens and who is responsible.</div>
+
+  <div class="po-timeline" id="timeline"></div>
+  <div style="margin-top:8px;font-size:11px;color:var(--color-text-secondary);">✦ Monthly bonus processed on the first Monday of the month only.</div>
+</div>
+
+<hr class="po-divider">
+
+<div class="po-section">
+  <div class="po-eyebrow">Roles — click each person</div>
+  <div class="po-section-title">Who does what</div>
+  <div class="po-section-sub">Payroll involves several people across Finance, IT, and operations. Click each role to see their responsibilities.</div>
+
+  <div class="po-roles" id="roles"></div>
+</div>
+
+<div class="po-callout">
+  <div class="po-callout-eye">The most important thing to know</div>
+  <div class="po-callout-body">"Payroll is not just a Friday task — it's a full week of preparation. If something goes wrong on Monday morning, it shows up on Friday. Start early, follow the steps in order, and never skip the validation checks."</div>
+</div>
+
+<hr class="po-divider">
+
+<div class="po-section">
+  <div class="po-eyebrow">Knowledge check</div>
+  <div class="po-section-title">Before you continue</div>
+
+  <div class="po-quiz">
+    <div class="po-quiz-hdr"><i class="ti ti-help-circle" style="font-size:15px;" aria-hidden="true"></i>3 questions</div>
+
+    <div class="po-q" id="q1">
+      <div class="po-q-text">What day does the payroll cycle officially start?</div>
+      <button class="po-opt" onclick="ans('q1',0,2)">Monday — when invoices arrive</button>
+      <button class="po-opt" onclick="ans('q1',1,2)">Tuesday — when absence reports are run</button>
+      <button class="po-opt" onclick="ans('q1',2,2)">Friday — the week before payment</button>
+      <div class="po-fb" id="q1-fb"></div>
+    </div>
+
+    <div class="po-q" id="q2">
+      <div class="po-q-text">What time does the batch payment execute every Friday?</div>
+      <button class="po-opt" onclick="ans('q2',0,1)">9am</button>
+      <button class="po-opt" onclick="ans('q2',1,1)">10am</button>
+      <button class="po-opt" onclick="ans('q2',2,1)">12pm</button>
+      <div class="po-fb" id="q2-fb"></div>
+    </div>
+
+    <div class="po-q" id="q3">
+      <div class="po-q-text">Who approves the Xero batch payment before it is executed?</div>
+      <button class="po-opt" onclick="ans('q3',0,0)">Jacqui / Cheene</button>
+      <button class="po-opt" onclick="ans('q3',1,0)">Leigh</button>
+      <button class="po-opt" onclick="ans('q3',2,0)">Accounts team</button>
+      <div class="po-fb" id="q3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var days = [
+  { day:"Friday", sub:"prior week", tasks:[{l:"Prepare master sheet",t:"payroll"}], detail:"Cheene duplicates the previous week's tab, clears variable data, adds new starters, and applies colour coding. This must be done before Monday AM." },
+  { day:"Monday", sub:"AM", tasks:[{l:"Electrician invoices",t:"payroll"},{l:"Weekly bonus email",t:"commission"}], detail:"Two things happen at the same time: Cheene processes the 19 electrician invoices through Copilot, and the weekly bonus approval email arrives from Casey/Jordan (approved by Stacey)." },
+  { day:"Mon–Tue", sub:"", tasks:[{l:"Absences & timesheets",t:"payroll"},{l:"Post-site commission",t:"commission"},{l:"Momentum sessions",t:"commission"},{l:"Monthly bonus ✦",t:"commission"}], detail:"The busiest part of the cycle. Absences are pulled from Bright HR, timesheets are reviewed, and all commission streams are calculated — post-site team, momentum sessions, Tristan, and Shannon." },
+  { day:"Tuesday", sub:"", tasks:[{l:"Send sheet to accounts",t:"accounts"}], detail:"Once all data is complete and validated, Cheene sends the master sheet to accounts via email with the standard template. All sections must be complete before sending." },
+  { day:"Wednesday", sub:"", tasks:[{l:"Accounts review + Xero",t:"accounts"}], detail:"Accounts adds PAYG and superannuation, resolves any leave balance queries, and loads all data into Xero. The completed sheet is returned to payroll by Wednesday." },
+  { day:"Thursday", sub:"", tasks:[{l:"Load Xero batch payment",t:"payroll"}], detail:"Cheene cross-references the returned sheet against the Xero pay run and submits for approval." },
+  { day:"Friday AM", sub:"", tasks:[{l:"Leigh approves in Xero",t:"approval"}], detail:"Leigh reviews the full pay run and approves. Payment cannot be executed without her approval. If Leigh is unavailable, escalate to the GM immediately." },
+  { day:"Friday 10am", sub:"", tasks:[{l:"Batch payment executed",t:"done"}], detail:"Payment is released and all employees are paid. Cycle complete.", special:true },
+];
+
+var roles = [
+  { name:"Cheene", title:"Payroll (incoming)", icon:"ti-calculator", color:"#E6F1FB", iconColor:"#185FA5", detail:"Owns the full weekly payroll cycle. Prepares the master sheet, processes invoices, runs absence reports, calculates commissions, and loads Xero." },
+  { name:"Jacqui", title:"Payroll (outgoing)", icon:"ti-transfer", color:"#F5F3FF", iconColor:"#534AB7", detail:"Current payroll owner. Transitioning responsibilities to Cheene. Source of knowledge for all informal rules and processes." },
+  { name:"Leigh", title:"Finance approver", icon:"ti-check", color:"#F0FDF4", iconColor:"#166534", detail:"Reviews and approves the Xero pay run every Friday morning. Payment cannot be executed without Leigh's approval." },
+  { name:"Accounts team", title:"PAYG & super", icon:"ti-report-money", color:"#FFFBEB", iconColor:"#854F0B", detail:"Adds PAYG and superannuation to the master sheet. Loads data into Xero. Returns completed sheet to payroll by Wednesday." },
+  { name:"Dejo", title:"Business systems (IT)", icon:"ti-device-desktop", color:"#F0FDF4", iconColor:"#166534", detail:"IT support for system access issues — Xero, Zoho CRM, Bright HR, and ShareDrive." },
+  { name:"Shaun & Ellie", title:"HR — new starters", icon:"ti-users", color:"#F5F3FF", iconColor:"#534AB7", detail:"Maintain the new starters spreadsheet. Cheene uses this to add new employees to the master sheet each week." },
+];
+
+var feedback = {
+  q1:{ 0:"Not quite — the cycle starts on Friday the prior week when Cheene prepares the master sheet. Monday is when processing begins.", 1:"Not quite — the cycle starts on Friday the prior week when Cheene prepares the master sheet.", 2:"Correct. The cycle starts on Friday the prior week when Cheene prepares the master sheet for the upcoming pay week." },
+  q2:{ 0:"Not quite — the batch payment executes at 10am.", 1:"Correct. The batch payment executes at 10am every Friday.", 2:"Not quite — the payment executes at 10am, not midday." },
+  q3:{ 0:"Not quite — Cheene prepares the pay run and submits it for approval. Leigh is the approver.", 1:"Correct. Leigh reviews the full Xero pay run and approves it before the 10am payment.", 2:"Accounts loads data into Xero, but Leigh is the approver for the final payment." },
+};
+
+function buildTimeline() {
+  var tl = document.getElementById('timeline');
+  days.forEach(function(d, i) {
+    var row = document.createElement('div');
+    row.className = 'po-day' + (d.special ? ' special' : '');
+    row.setAttribute('data-i', i);
+    var chips = d.tasks.map(function(t) { return '<span class="po-chip ' + t.t + '">' + t.l + '</span>'; }).join('');
+    row.innerHTML = '<div class="po-day-label">' + d.day + (d.sub ? '<span class="po-day-sub">' + d.sub + '</span>' : '') + '</div><div class="po-day-tasks">' + chips + '</div>';
+    var detail = document.createElement('div');
+    detail.className = 'po-day-detail';
+    detail.id = 'day-detail-' + i;
+    detail.textContent = d.detail;
+    row.onclick = function() { toggleDay(i, row, detail); };
+    tl.appendChild(row);
+    tl.appendChild(detail);
+  });
+}
+
+function toggleDay(i, row, detail) {
+  var isOpen = detail.classList.contains('open');
+  document.querySelectorAll('.po-day').forEach(function(r) { r.classList.remove('active'); });
+  document.querySelectorAll('.po-day-detail').forEach(function(d) { d.classList.remove('open'); });
+  if (!isOpen) { row.classList.add('active'); detail.classList.add('open'); }
+}
+
+function buildRoles() {
+  var grid = document.getElementById('roles');
+  roles.forEach(function(r, i) {
+    var card = document.createElement('div');
+    card.className = 'po-role-card';
+    card.innerHTML = '<div class="po-role-icon" style="background:' + r.color + '"><i class="ti ' + r.icon + '" style="font-size:16px;color:' + r.iconColor + ';" aria-hidden="true"></i></div><div class="po-role-name">' + r.name + '</div><div class="po-role-title">' + r.title + '</div><div class="po-role-detail" id="role-detail-' + i + '">' + r.detail + '</div>';
+    card.onclick = function() { toggleRole(i, card); };
+    grid.appendChild(card);
+  });
+}
+
+function toggleRole(i, card) {
+  var detail = document.getElementById('role-detail-' + i);
+  var isOpen = detail.classList.contains('open');
+  document.querySelectorAll('.po-role-card').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelectorAll('.po-role-detail').forEach(function(d) { d.classList.remove('open'); });
+  if (!isOpen) { card.classList.add('active'); detail.classList.add('open'); }
+}
+
+function ans(qid, idx, correct) {
+  var opts = document.querySelectorAll('#' + qid + ' .po-opt');
+  opts.forEach(function(o) { o.disabled = true; });
+  opts[correct].classList.add('correct');
+  if (idx !== correct) opts[idx].classList.add('wrong');
+  var fb = document.getElementById(qid + '-fb');
+  fb.textContent = (idx === correct ? 'Correct. ' : 'Not quite. ') + feedback[qid][idx];
+  fb.className = 'po-fb show ' + (idx === correct ? 'ok' : 'bad');
+}
+
+buildTimeline();
+buildRoles();
+</script>
