@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll Onboarding — Module 2 | RESINC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#F8FAFB;color:#1A202C;padding:0 0 3rem;}
+
+.m2-hero{background:#0A3542;padding:2rem 1.5rem 2.5rem;}
+.m2-hero-tag{background:rgba(0,174,239,.2);color:#00AEEF;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:12px;border:1px solid rgba(0,174,239,.3);}
+.m2-hero-title{color:#fff;font-size:26px;font-weight:700;line-height:1.2;margin-bottom:8px;}
+.m2-hero-sub{color:rgba(255,255,255,.6);font-size:13px;line-height:1.6;}
+
+.m2-video-row{background:#fff;border-bottom:1px solid #E8EDF2;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.m2-play{width:44px;height:44px;border-radius:50%;background:#00AEEF;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(0,174,239,.35);}
+.m2-video-title{font-size:14px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.m2-video-sub{font-size:12px;color:#8899AA;}
+
+.m2-body{padding:1.5rem;}
+.m2-section{margin-bottom:2.5rem;}
+.m2-section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.5rem;}
+.m2-section-icon{width:32px;height:32px;border-radius:8px;background:#0A3542;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.m2-section-title{font-size:16px;font-weight:700;color:#0A3542;}
+.m2-section-sub{font-size:13px;color:#6B7E8F;margin-bottom:1rem;padding-left:42px;}
+.divider{border:none;border-top:1px solid #E8EDF2;margin:2rem 0;}
+
+.m2-step-list{display:flex;flex-direction:column;}
+.m2-step{display:flex;cursor:pointer;}
+.m2-step-left{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0;}
+.m2-step-circle{width:32px;height:32px;border-radius:50%;background:#EBF5FF;border:2px solid #B5D4F4;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#185FA5;flex-shrink:0;transition:all .2s;}
+.m2-step.done .m2-step-circle{background:#0A3542;border-color:#0A3542;color:#00AEEF;}
+.m2-step-line{width:2px;background:#E8EDF2;flex:1;min-height:16px;}
+.m2-step:last-child .m2-step-line{display:none;}
+.m2-step-right{flex:1;padding:0 0 20px 12px;}
+.m2-step-title{font-size:14px;font-weight:600;color:#0A3542;margin-bottom:2px;padding-top:4px;}
+.m2-step-meta{font-size:12px;color:#8899AA;}
+.m2-step-detail{margin-top:10px;background:#fff;border:1px solid #E8EDF2;border-radius:10px;padding:12px 14px;font-size:12.5px;color:#4A5568;line-height:1.6;display:none;}
+.m2-step-detail.open{display:block;}
+.m2-step-detail-tag{display:inline-block;background:#EBF5FF;color:#185FA5;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase;}
+
+.m2-colour-wrap{display:flex;flex-direction:column;gap:8px;}
+.m2-colour-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #E8EDF2;border-radius:10px;padding:10px 14px;cursor:pointer;transition:all .15s;}
+.m2-colour-row:hover{border-color:#CBD5E0;}
+.m2-colour-row.active{border-color:#00AEEF;background:#F0FBFF;}
+.m2-colour-swatch{width:28px;height:28px;border-radius:6px;flex-shrink:0;border:1px solid rgba(0,0,0,.08);}
+.m2-colour-name{font-size:13px;font-weight:700;color:#0A3542;}
+.m2-colour-meaning{font-size:12px;color:#6B7E8F;}
+.m2-colour-chevron{color:#8899AA;font-size:16px;margin-left:auto;transition:transform .2s;}
+.m2-colour-row.active .m2-colour-chevron{transform:rotate(180deg);}
+.m2-colour-detail-row{background:#F0FBFF;border:1px solid #BAE6FD;border-radius:10px;padding:12px 14px;font-size:12.5px;color:#0A3542;line-height:1.6;display:none;margin-top:-4px;}
+.m2-colour-detail-row.open{display:block;}
+
+.m2-sim-wrap{background:#fff;border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;}
+.m2-sim-top{background:#0A3542;padding:1rem 1.25rem;}
+.m2-sim-q{color:#fff;font-size:14px;font-weight:600;margin-bottom:10px;}
+.m2-sim-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.m2-sim-chip{font-size:12px;font-weight:600;padding:6px 14px;border-radius:999px;border:1.5px solid #fff;background:transparent;color:#fff;cursor:pointer;font-family:inherit;transition:all .15s;}
+.m2-sim-chip:hover{background:rgba(255,255,255,.15);}
+.m2-sim-chip.active{background:#00AEEF;border-color:#00AEEF;color:#fff;}
+.m2-sim-result{padding:1.25rem;font-size:13px;color:#4A5568;line-height:1.6;min-height:80px;display:flex;align-items:flex-start;gap:12px;}
+.m2-sim-swatch{width:36px;height:36px;border-radius:8px;flex-shrink:0;margin-top:2px;border:1px solid rgba(0,0,0,.1);}
+
+.m2-source-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;}
+.m2-source-card{border-radius:12px;padding:1rem 1.1rem;}
+.m2-source-tag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.m2-source-name{font-size:13px;font-weight:700;color:#0A3542;margin-bottom:4px;}
+
+.m2-callout{background:#0A3542;border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:0;}
+.m2-callout-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00AEEF;margin-bottom:6px;}
+.m2-callout-text{font-size:13px;color:rgba(255,255,255,.85);line-height:1.7;font-style:italic;}
+
+.m2-quiz-wrap{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;background:#fff;}
+.m2-quiz-hdr{background:#F8FAFB;padding:.75rem 1.1rem;font-size:12px;font-weight:700;color:#6B7E8F;display:flex;align-items:center;gap:8px;border-bottom:1px solid #E8EDF2;text-transform:uppercase;letter-spacing:.5px;}
+.m2-q{padding:1rem 1.1rem;border-bottom:1px solid #E8EDF2;}
+.m2-q:last-child{border-bottom:none;}
+.m2-q-text{font-size:14px;color:#0A3542;font-weight:600;margin-bottom:10px;line-height:1.4;}
+.m2-opt{display:block;width:100%;text-align:left;background:#F8FAFB;border:1px solid #E8EDF2;border-radius:8px;padding:10px 13px;margin-bottom:6px;font-size:13px;color:#0A3542;cursor:pointer;font-family:inherit;transition:all .15s;}
+.m2-opt:hover:not(:disabled){background:#EBF5FF;border-color:#B5D4F4;}
+.m2-opt.correct{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;font-weight:600;}
+.m2-opt.wrong{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
+.m2-opt:disabled{cursor:default;}
+.m2-fb{font-size:12px;margin-top:8px;padding:8px 10px;border-radius:8px;display:none;line-height:1.5;}
+.m2-fb.show{display:block;}
+.m2-fb.ok{background:#ECFDF5;color:#065F46;}
+.m2-fb.bad{background:#FEF2F2;color:#991B1B;}
+</style>
+</head>
+<body>
+
+<div class="m2-hero">
+  <div class="m2-hero-tag">Module 2 of 7</div>
+  <div class="m2-hero-title">Preparing the master sheet</div>
+  <div class="m2-hero-sub">Every Friday before you leave, the master sheet needs to be set up for next week. This module covers every step.</div>
+</div>
+
+<div class="m2-video-row">
+  <button class="m2-play" aria-label="Play video"><i class="ti ti-player-play" style="font-size:18px;color:white;"></i></button>
+  <div>
+    <div class="m2-video-title">Watch first — master sheet walkthrough</div>
+    <div class="m2-video-sub">Insert your Synthesia or Vyond video link here · ~3 min</div>
+  </div>
+</div>
+
+<div class="m2-body">
+
+<div class="m2-section">
+  <div class="m2-section-hdr">
+    <div class="m2-section-icon"><i class="ti ti-list-check" style="font-size:16px;color:#00AEEF;"></i></div>
+    <div class="m2-section-title">6 steps — every Friday</div>
+  </div>
+  <div class="m2-section-sub">Click each step to expand the detail.</div>
+  <div class="m2-step-list" id="steps"></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="m2-section">
+  <div class="m2-section-hdr">
+    <div class="m2-section-icon"><i class="ti ti-palette" style="font-size:16px;color:#00AEEF;"></i></div>
+    <div class="m2-section-title">Colour coding guide</div>
+  </div>
+  <div class="m2-section-sub">Click any colour to see when and how to use it.</div>
+  <div class="m2-colour-wrap" id="colours"></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="m2-section">
+  <div class="m2-section-hdr">
+    <div class="m2-section-icon"><i class="ti ti-user-plus" style="font-size:16px;color:#00AEEF;"></i></div>
+    <div class="m2-section-title">New starter — what colour?</div>
+  </div>
+  <div class="m2-section-sub">Select an employment type to see what to do.</div>
+  <div class="m2-sim-wrap">
+    <div class="m2-sim-top">
+      <div class="m2-sim-q">What type of employee is this?</div>
+      <div class="m2-sim-chips" id="sim-chips"></div>
+    </div>
+    <div class="m2-sim-result" id="sim-result">
+      <div style="color:#8899AA;font-size:13px;padding-top:4px;">Select an option above to see what to do.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="m2-section">
+  <div class="m2-section-hdr">
+    <div class="m2-section-icon"><i class="ti ti-file-certificate" style="font-size:16px;color:#00AEEF;"></i></div>
+    <div class="m2-section-title">Verifying the pay rate</div>
+  </div>
+  <div class="m2-section-sub">Two places to look — only one is the source of truth.</div>
+  <div class="m2-source-grid">
+    <div class="m2-source-card" style="background:#ECFDF5;border:1px solid #6EE7B7;">
+      <div class="m2-source-tag" style="color:#065F46;">Source of truth</div>
+      <div class="m2-source-name">Signed contract PDF</div>
+      <div style="font-size:12px;color:#047857;line-height:1.5;">Documents tab → employment contract → last page. Always use this rate.</div>
+    </div>
+    <div class="m2-source-card" style="background:#FFFBEB;border:1px solid #FDE68A;">
+      <div class="m2-source-tag" style="color:#92400E;">Secondary only</div>
+      <div class="m2-source-name">Employment tab → Pay details</div>
+      <div style="font-size:12px;color:#92400E;line-height:1.5;">May be out of date. Flag it if the two figures differ.</div>
+    </div>
+  </div>
+  <div class="m2-callout">
+    <div class="m2-callout-tag">The rule</div>
+    <div class="m2-callout-text">"If the contract and Bright HR show different rates, always use the contract. If something looks off, flag it before entering anything — don't guess."</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="m2-section">
+  <div class="m2-section-hdr">
+    <div class="m2-section-icon"><i class="ti ti-help-circle" style="font-size:16px;color:#00AEEF;"></i></div>
+    <div class="m2-section-title">Knowledge check</div>
+  </div>
+  <div class="m2-quiz-wrap">
+    <div class="m2-quiz-hdr"><i class="ti ti-writing" style="font-size:14px;"></i>3 questions before you continue</div>
+    <div class="m2-q" id="q1">
+      <div class="m2-q-text">What colour code do you apply to an electrician?</div>
+      <button class="m2-opt" onclick="ans('q1',0,2)">Orange — part-time</button>
+      <button class="m2-opt" onclick="ans('q1',1,2)">Yellow — casual</button>
+      <button class="m2-opt" onclick="ans('q1',2,2)">Green — electrician (overtime eligible)</button>
+      <div class="m2-fb" id="q1-fb"></div>
+    </div>
+    <div class="m2-q" id="q2">
+      <div class="m2-q-text">Bright HR shows $28/hr. The signed contract shows $30/hr. Which do you use?</div>
+      <button class="m2-opt" onclick="ans('q2',0,1)">$28 — the system is always up to date</button>
+      <button class="m2-opt" onclick="ans('q2',1,1)">$30 — the signed contract is the source of truth</button>
+      <button class="m2-opt" onclick="ans('q2',2,1)">Average the two and flag for review</button>
+      <div class="m2-fb" id="q2-fb"></div>
+    </div>
+    <div class="m2-q" id="q3">
+      <div class="m2-q-text">When duplicating last week's tab, which data must you clear?</div>
+      <button class="m2-opt" onclick="ans('q3',0,0)">Overtime, sick pay, annual leave, unpaid hours, and performance bonus</button>
+      <button class="m2-opt" onclick="ans('q3',1,0)">Everything — start completely fresh each week</button>
+      <button class="m2-opt" onclick="ans('q3',2,0)">Only the bonus column</button>
+      <div class="m2-fb" id="q3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var steps=[
+  {n:1,title:"Duplicate the previous week's tab",meta:"ShareDrive — Weekly Pay Master Sheet",tag:"ShareDrive",detail:"Open the master sheet on ShareDrive. Right-click the previous week's tab and duplicate it. All standing data — names, rates, employment types, colour coding — carries over automatically."},
+  {n:2,title:"Rename with the Friday payment date",meta:"Format: DD/MM/YY  e.g. 15/05/26",tag:"Naming convention",detail:"Rename the new tab with the Friday date of the upcoming payment week. This is how accounts and payroll identify the correct cycle at a glance."},
+  {n:3,title:"Clear all variable data",meta:"Overtime, leave, bonuses only",tag:"What to delete",detail:"Delete: overtime hours, sick pay hours, annual leave hours, unpaid hours, and performance bonus. Never delete standing data — names, rates, and colour coding must stay."},
+  {n:4,title:"Add new starters",meta:"From Shaun and Ellie's spreadsheet",tag:"HR spreadsheet",detail:"Open the new starters spreadsheet. For each person starting this week, add a row: job role (col 4), employment type (col 5), name (col 6), and hourly rate. Verify rate against the signed contract in Bright HR before entering."},
+  {n:5,title:"Apply colour coding",meta:"Pink, red, green, orange, or yellow",tag:"See colour guide",detail:"Apply the correct colour to each employee's name row. Accounts and payroll both rely on these colours — get them right before saving."},
+  {n:6,title:"Sort alphabetically and save",meta:"Before you close the file",detail:"Sort the entire sheet alphabetically. This makes it significantly faster for everyone to locate employees during absence and bonus processing later in the week."},
+];
+var colours=[
+  {name:"Pink",hex:"#FFB6C1",meaning:"New starter",detail:"Apply for the employee's first pay cycle only. Replace with their permanent colour from the second cycle onwards."},
+  {name:"Red",hex:"#FF6B6B",meaning:"Terminated employee",detail:"Keep the row until accounts confirms the final pay — including unused leave payout — has been processed."},
+  {name:"Green",hex:"#90EE90",meaning:"Electrician (overtime eligible)",detail:"Green rows are the ONLY rows eligible for overtime. If approved hours exceed 38h, record the approved amount exactly."},
+  {name:"Orange",hex:"#FFB347",meaning:"Part-time",detail:"Column 15 reflects contracted hours — not 38h. Always verify against the signed contract before entering."},
+  {name:"Yellow",hex:"#FFFF99",meaning:"Casual",detail:"Paid for hours worked only. No guaranteed minimum. Hours come from the timesheet each week."},
+];
+var scenarios=[
+  {label:"Full-time salaried",hex:"#FFFFFF",border:"#CBD5E0",textCol:"#0A3542",msg:"No special colour — default/white. Always paid a minimum of 38h regardless of hours clocked."},
+  {label:"Electrician",hex:"#90EE90",border:"#4CAF50",textCol:"#1A5C1A",msg:"Green — overtime eligible. Record Copilot-calculated hours. If approved invoice shows more than 38h, record the approved amount exactly."},
+  {label:"Part-time",hex:"#FFB347",border:"#E65C00",textCol:"#7B4200",msg:"Orange. Column 15 reflects contracted hours — not 38h. Verify against the signed contract."},
+  {label:"Casual",hex:"#FFFF99",border:"#B8860B",textCol:"#7B7B00",msg:"Yellow. Paid for hours worked only. Hours come from the timesheet each week."},
+  {label:"New starter",hex:"#FFB6C1",border:"#E75480",textCol:"#7B2D3A",msg:"Pink — first cycle only. Verify pay rate against the signed contract before entering. Replace with permanent colour from their second cycle."},
+  {label:"Terminating",hex:"#FF6B6B",border:"#C0392B",textCol:"#7B1C1C",msg:"Red. Keep the row until accounts confirms the final pay — including unused leave — has been processed."},
+];
+var feedback={
+  q1:{0:"Not quite — orange is for part-time employees. Electricians are green because they are the only group eligible for overtime.",1:"Not quite — yellow is for casual employees. Electricians are green.",2:"Correct. Green rows are the only rows eligible for overtime."},
+  q2:{0:"Not quite — Bright HR pay details may not reflect the most recently signed agreement. Always use the signed contract.",1:"Correct. The signed contract is always the source of truth. Flag the discrepancy to accounts.",2:"Never average the two. Use the contract figure and flag the discrepancy."},
+  q3:{0:"Correct. These five fields change every cycle. Standing data — names, rates, colour coding — must stay.",1:"Never clear everything — you would lose all standing employee data.",2:"Bonus is one, but there are four more: overtime, sick pay, annual leave, and unpaid hours."},
+};
+function buildSteps(){
+  var el=document.getElementById('steps');
+  steps.forEach(function(s,i){
+    var wrap=document.createElement('div');wrap.className='m2-step';wrap.dataset.idx=i;
+    var left=document.createElement('div');left.className='m2-step-left';
+    var circle=document.createElement('div');circle.className='m2-step-circle';circle.textContent=s.n;
+    var line=document.createElement('div');line.className='m2-step-line';
+    left.appendChild(circle);left.appendChild(line);
+    var right=document.createElement('div');right.className='m2-step-right';
+    right.innerHTML='<div class="m2-step-title">'+s.title+'</div><div class="m2-step-meta">'+s.meta+'</div>';
+    var detail=document.createElement('div');detail.className='m2-step-detail';
+    detail.innerHTML=(s.tag?'<div class="m2-step-detail-tag">'+s.tag+'</div>':'')+s.detail;
+    right.appendChild(detail);
+    wrap.appendChild(left);wrap.appendChild(right);
+    wrap.onclick=function(){
+      var open=detail.classList.contains('open');
+      document.querySelectorAll('.m2-step-detail').forEach(function(d){d.classList.remove('open');});
+      document.querySelectorAll('.m2-step').forEach(function(r){
+        r.classList.remove('done');
+        r.querySelector('.m2-step-circle').textContent=steps[r.dataset.idx].n;
+      });
+      if(!open){detail.classList.add('open');wrap.classList.add('done');circle.innerHTML='<i class="ti ti-check" style="font-size:14px;"></i>';}
+    };
+    el.appendChild(wrap);el.appendChild(detail);
+  });
+}
+function buildColours(){
+  var wrap=document.getElementById('colours');
+  colours.forEach(function(c){
+    var row=document.createElement('div');row.className='m2-colour-row';
+    row.innerHTML='<div class="m2-colour-swatch" style="background:'+c.hex+'"></div><div style="flex:1"><div class="m2-colour-name">'+c.name+'</div><div class="m2-colour-meaning">'+c.meaning+'</div></div><i class="m2-colour-chevron ti ti-chevron-down"></i>';
+    var detail=document.createElement('div');detail.className='m2-colour-detail-row';detail.textContent=c.detail;
+    row.onclick=function(){
+      var open=detail.classList.contains('open');
+      document.querySelectorAll('.m2-colour-row').forEach(function(r){r.classList.remove('active');});
+      document.querySelectorAll('.m2-colour-detail-row').forEach(function(d){d.classList.remove('open');});
+      if(!open){row.classList.add('active');detail.classList.add('open');}
+    };
+    wrap.appendChild(row);wrap.appendChild(detail);
+  });
+}
+function buildSim(){
+  var chips=document.getElementById('sim-chips');
+  var result=document.getElementById('sim-result');
+  scenarios.forEach(function(s){
+    var chip=document.createElement('button');chip.className='m2-sim-chip';chip.textContent=s.label;
+    chip.onclick=function(){
+      document.querySelectorAll('.m2-sim-chip').forEach(function(c){c.classList.remove('active');});
+      chip.classList.add('active');
+      result.innerHTML='<div class="m2-sim-swatch" style="background:'+s.hex+';border-color:'+s.border+'"></div><div><strong style="color:'+s.textCol+';display:block;margin-bottom:4px;">'+s.label+'</strong><span style="color:#4A5568">'+s.msg+'</span></div>';
+    };
+    chips.appendChild(chip);
+  });
+}
+function ans(qid,idx,correct){
+  var opts=document.querySelectorAll('#'+qid+' .m2-opt');
+  opts.forEach(function(o){o.disabled=true;});
+  opts[correct].classList.add('correct');
+  if(idx!==correct)opts[idx].classList.add('wrong');
+  var fb=document.getElementById(qid+'-fb');
+  fb.textContent=(idx===correct?'Correct. ':'Not quite — the correct answer is highlighted in green. ')+feedback[qid][idx];
+  fb.className='m2-fb show '+(idx===correct?'ok':'bad');
+}
+buildSteps();buildColours();buildSim();
+</script>
+</body>
+</html>
