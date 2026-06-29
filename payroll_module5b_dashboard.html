@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll Onboarding — Module 5B | RESINC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#F8FAFB;color:#1A202C;padding:0 0 3rem;}
+.hero{background:#0A3542;padding:1.75rem 1.5rem 2rem;}
+.hero-tag{background:rgba(0,174,239,.2);color:#00AEEF;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:10px;border:1px solid rgba(0,174,239,.3);}
+.hero-title{color:#fff;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+.hero-sub{color:rgba(255,255,255,.55);font-size:13px;line-height:1.5;}
+.vid-row{background:#fff;border-bottom:1px solid #E8EDF2;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.vid-play{width:42px;height:42px;border-radius:50%;background:#00AEEF;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:none;cursor:pointer;}
+.vid-title{font-size:14px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.vid-sub{font-size:12px;color:#8899AA;}
+.body{padding:1.5rem;}
+.sec{margin-bottom:2rem;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.4rem;}
+.sec-icon{width:30px;height:30px;border-radius:8px;background:#0A3542;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sec-title{font-size:15px;font-weight:700;color:#0A3542;}
+.sec-sub{font-size:13px;color:#6B7E8F;margin-bottom:1rem;padding-left:40px;}
+.div{border:none;border-top:1px solid #E8EDF2;margin:2rem 0;}
+
+.tabs{display:flex;border-bottom:1px solid #E8EDF2;margin-bottom:1.25rem;overflow-x:auto;}
+.tab{padding:8px 16px;font-size:12px;font-weight:600;color:#8899AA;cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
+.tab.active{color:#0A3542;border-bottom-color:#00AEEF;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.flow{display:flex;flex-direction:column;border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;margin-bottom:1rem;}
+.flow-row{display:flex;align-items:stretch;border-bottom:1px solid #E8EDF2;cursor:pointer;background:#fff;transition:background .12s;}
+.flow-row:last-child{border-bottom:none;}
+.flow-row:hover{background:#F7FAFC;}
+.flow-row.active{background:#EBF8FF;}
+.flow-num{width:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#B5D4F4;border-right:1px solid #E8EDF2;}
+.flow-row.active .flow-num{color:#185FA5;}
+.flow-content{flex:1;padding:10px 14px;}
+.flow-title{font-size:13px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.flow-meta{font-size:11.5px;color:#8899AA;}
+.flow-chevron{width:36px;display:flex;align-items:center;justify-content:center;color:#CBD5E0;font-size:15px;}
+.flow-detail{padding:10px 14px 12px 58px;border-top:1px solid #BAE6FD;font-size:12.5px;color:#0A3542;line-height:1.6;display:none;background:#EBF8FF;}
+.flow-detail.open{display:block;}
+
+.info-card{border:1px solid #E8EDF2;border-radius:10px;padding:1rem;background:#fff;margin-bottom:.75rem;}
+.info-label{font-size:10px;font-weight:700;color:#8899AA;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.info-val{font-size:14px;font-weight:700;color:#0A3542;margin-bottom:3px;}
+.info-desc{font-size:12px;color:#6B7E8F;line-height:1.5;}
+
+.rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;}
+.rate-card{border-radius:10px;padding:1rem;border:1px solid #E8EDF2;}
+.rate-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.rate-val{font-size:24px;font-weight:700;margin-bottom:3px;}
+.rate-desc{font-size:12px;line-height:1.4;}
+.rate-battery{background:#EBF5FF;border-color:#B5D4F4;}
+.rate-battery .rate-label{color:#185FA5;}
+.rate-battery .rate-val{color:#0C447C;}
+.rate-battery .rate-desc{color:#185FA5;}
+.rate-solar{background:#FFFBEB;border-color:#FDE68A;}
+.rate-solar .rate-label{color:#92400E;}
+.rate-solar .rate-val{color:#78350F;}
+.rate-solar .rate-desc{color:#92400E;}
+
+.warn-box{border-radius:10px;padding:.9rem 1rem;margin-bottom:.75rem;border-left:3px solid;}
+.warn-orange{background:#FFFBEB;border-color:#F59E0B;}
+.warn-orange .warn-label{color:#B45309;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.warn-orange .warn-text{font-size:12.5px;color:#78350F;line-height:1.6;}
+.warn-red{background:#FEF2F2;border-color:#EF4444;}
+.warn-red .warn-label{color:#991B1B;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.warn-red .warn-text{font-size:12.5px;color:#7F1D1D;line-height:1.6;}
+
+.quiz{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;background:#fff;}
+.quiz-hdr{background:#F8FAFB;padding:.65rem 1rem;font-size:11px;font-weight:700;color:#6B7E8F;display:flex;align-items:center;gap:7px;border-bottom:1px solid #E8EDF2;text-transform:uppercase;letter-spacing:.5px;}
+.q{padding:.9rem 1rem;border-bottom:1px solid #E8EDF2;}
+.q:last-child{border-bottom:none;}
+.q-text{font-size:14px;color:#0A3542;font-weight:600;margin-bottom:9px;line-height:1.4;}
+.opt{display:block;width:100%;text-align:left;background:#F8FAFB;border:1px solid #E8EDF2;border-radius:8px;padding:9px 12px;margin-bottom:5px;font-size:13px;color:#0A3542;cursor:pointer;font-family:inherit;transition:all .15s;}
+.opt:hover:not(:disabled){background:#EBF5FF;border-color:#B5D4F4;}
+.opt.correct{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;font-weight:600;}
+.opt.wrong{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
+.opt:disabled{cursor:default;}
+.fb{font-size:12px;margin-top:7px;padding:7px 10px;border-radius:7px;display:none;line-height:1.5;}
+.fb.show{display:block;}
+.fb.ok{background:#ECFDF5;color:#065F46;}
+.fb.bad{background:#FEF2F2;color:#991B1B;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Module 5B of 7</div>
+  <div class="hero-title">Commissions — post-site, momentum &amp; monthly</div>
+  <div class="hero-sub">Mon–Tue. Four commission streams — Shannon's post-site team, momentum sessions, Tristan (team leader), and monthly bonus. Each has different rules and data sources.</div>
+</div>
+
+<div class="vid-row">
+  <button class="vid-play" aria-label="Play video"><i class="ti ti-player-play" style="font-size:17px;color:white;"></i></button>
+  <div>
+    <div class="vid-title">Module 5B — commissions walkthrough</div>
+    <div class="vid-sub">Insert Synthesia video link here · ~4 min</div>
+  </div>
+</div>
+
+<div class="body">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-layout-columns" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Four commission streams — select one</div>
+  </div>
+  <div class="sec-sub">Each stream has its own data source, rules, and template. Work through them in order.</div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(0)">Post-site team</button>
+    <button class="tab" onclick="switchTab(1)">Momentum sessions</button>
+    <button class="tab" onclick="switchTab(2)">Tristan</button>
+    <button class="tab" onclick="switchTab(3)">Monthly bonus</button>
+  </div>
+
+  <div class="tab-panel active" id="tp0">
+    <div class="info-card">
+      <div class="info-label">Data source</div>
+      <div class="info-val">Zoho CRM → Dashboards → "Post-site last week"</div>
+      <div class="info-desc">Wait for Shannon to confirm via text that all data is accurate before processing. Shannon typically confirms around lunchtime Monday.</div>
+    </div>
+    <div class="warn-red">
+      <div class="warn-label">Wait for Shannon's confirmation</div>
+      <div class="warn-text">Do not process Shannon's team commission before Shannon has confirmed the dashboard data is accurate. The TrustPilot data feed may be delayed — early figures could be incorrect.</div>
+    </div>
+    <div class="flow" id="flow-postsite"></div>
+  </div>
+
+  <div class="tab-panel" id="tp1">
+    <div class="info-card">
+      <div class="info-label">Data source</div>
+      <div class="info-val">Zoho CRM → Reports → "Post site and MS – appointments created last week"</div>
+      <div class="info-desc">Check each team member's session count against the 20-session threshold before opening any templates.</div>
+    </div>
+    <div class="info-card" style="background:#F0FDF4;border-color:#86EFAC;">
+      <div class="info-label" style="color:#166534;">Threshold rule</div>
+      <div class="info-val" style="color:#065F46;">20 sessions minimum</div>
+      <div class="info-desc" style="color:#166534;">If 20 or more sessions: commission is payable. If fewer than 20 sessions: no commission this week. Enter zero — never leave blank. Exception possible if public holiday reduced working days — contact Shannon for written approval.</div>
+    </div>
+    <div class="flow" id="flow-momentum"></div>
+  </div>
+
+  <div class="tab-panel" id="tp2">
+    <div class="info-card">
+      <div class="info-label">Data source</div>
+      <div class="info-val">Same Zoho CRM post-site dashboard used for Shannon's team (Step 7)</div>
+      <div class="info-desc">Tristan's commission has two separate parts — his own personal metrics and a team activity bonus. These are calculated separately and must not be combined.</div>
+    </div>
+    <div class="info-card" style="background:#FFFBEB;border-color:#FDE68A;">
+      <div class="info-label" style="color:#92400E;">Key rule</div>
+      <div class="info-val" style="color:#78350F;">Team threshold: 30 reviews per active member</div>
+      <div class="info-desc" style="color:#92400E;">Tristan's own review count must NOT be included in the team total. Account for any team members on leave or working fewer days. Single flat value — no increment above threshold.</div>
+    </div>
+    <div class="flow" id="flow-tristan"></div>
+  </div>
+
+  <div class="tab-panel" id="tp3">
+    <div class="info-card" style="background:#EBF5FF;border-color:#B5D4F4;">
+      <div class="info-label" style="color:#185FA5;">Process owner</div>
+      <div class="info-val" style="color:#0C447C;">Jacqui — not Cheene</div>
+      <div class="info-desc" style="color:#185FA5;">The monthly bonus process stays with Jacqui permanently. Cheene does not process monthly bonuses. This section is for reference only.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">When</div>
+      <div class="info-val">First Monday of each month only</div>
+      <div class="info-desc">Data source: Zoho CRM → Reports → "Installed last month"</div>
+    </div>
+    <div class="rate-grid">
+      <div class="rate-card rate-battery">
+        <div class="rate-label">Battery</div>
+        <div class="rate-val">$0.25</div>
+        <div class="rate-desc">Per kWh — sum of battery size × $0.25</div>
+      </div>
+      <div class="rate-card rate-solar">
+        <div class="rate-label">Solar</div>
+        <div class="rate-val">$1.00</div>
+        <div class="rate-desc">Per kW — sum of solar system size × $1.00</div>
+      </div>
+    </div>
+    <div class="warn-orange">
+      <div class="warn-label">Stacey Thornton — confirm with Chris</div>
+      <div class="warn-text">Stacey's $3,500 bonus is target-triggered. Chris confirms to Jacqui via WhatsApp/text if the target has been hit. Written confirmation is required before processing. Do not process without it.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-help-circle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Knowledge check</div>
+  </div>
+  <div class="quiz">
+    <div class="quiz-hdr"><i class="ti ti-writing" style="font-size:13px;"></i>3 questions</div>
+    <div class="q" id="q1">
+      <div class="q-text">Shannon hasn't sent her confirmation text yet and it's Monday afternoon. What do you do?</div>
+      <button class="opt" onclick="ans('q1',0,2)">Process using the current Zoho dashboard figures — they're probably right</button>
+      <button class="opt" onclick="ans('q1',1,2)">Copy last week's commission amounts as a placeholder</button>
+      <button class="opt" onclick="ans('q1',2,2)">Wait for Shannon's confirmation before processing — do not use unconfirmed figures</button>
+      <div class="fb" id="q1-fb"></div>
+    </div>
+    <div class="q" id="q2">
+      <div class="q-text">A momentum sessions team member completed 18 sessions this week. There was no public holiday. Do they receive commission?</div>
+      <button class="opt" onclick="ans('q2',0,1)">Yes — they were close to the threshold</button>
+      <button class="opt" onclick="ans('q2',1,1)">No — below 20 sessions, enter zero</button>
+      <button class="opt" onclick="ans('q2',2,1)">Contact Shannon to confirm</button>
+      <div class="fb" id="q2-fb"></div>
+    </div>
+    <div class="q" id="q3">
+      <div class="q-text">When calculating Tristan's team activity bonus, should his own review count be included in the team total?</div>
+      <button class="opt" onclick="ans('q3',0,0)">Yes — he is part of the team</button>
+      <button class="opt" onclick="ans('q3',1,0)">No — Tristan's own metrics are calculated separately and must not be included in the team total</button>
+      <button class="opt" onclick="ans('q3',2,0)">Only if his count would push the team over the threshold</button>
+      <div class="fb" id="q3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var flowData={
+  postsite:[
+    {n:1,title:"Open Zoho CRM → Dashboards → 'Post-site last week'",meta:"Wait for Shannon's text confirmation first",detail:"Do not open the template or enter any figures until Shannon has confirmed via text that the dashboard data is accurate."},
+    {n:2,title:"For each team member: open their commission template on ShareDrive",meta:"Post-site commission templates folder",detail:"Open the individual commission template for each post-site team member."},
+    {n:3,title:"Duplicate the tab and rename with the Friday payment date",meta:"e.g. 15/5/26",detail:"Right-click the previous tab, duplicate it, and rename with the Friday payment date."},
+    {n:4,title:"Update the PAY DATE field",meta:"In the new tab",detail:"Update the PAY DATE field in the new tab with the current Friday's date."},
+    {n:5,title:"Fill in the commission table using Zoho dashboard data",meta:"Reviews, panel cleaning, referrals, battery sales",detail:"Using the figures from the Zoho post-site dashboard, fill in each metric for the team member: reviews, panel cleaning, referrals, and battery sales."},
+    {n:6,title:"Check team bonus threshold (≥90 reviews)",meta:"If total team reviews ≥ 90, apply team bonus to all qualifying members",detail:"Check the total team review count. If 90 or more, complete the 'Weekly team bonus 90+' section for all qualifying team members."},
+    {n:7,title:"Check individual awards",meta:"Most reviews + most referral lead",detail:"Most reviews award: identify the team member with the highest individual review count. If they meet the minimum threshold, record a count of 1. Most referral lead award: identify the team member with the most referrals — minimum 5 required. If two or more members are tied for the highest count, the award is paid to all tied members. Each award is paid once per week."},
+    {n:8,title:"Apply the payable rule",meta:"Commission only paid if it exceeds base gross wage",detail:"For each employee, confirm whether their total commission bonus exceeds their base gross wage for the week. Payable amount = total commission bonus minus base gross wage. If commission does not exceed base gross, no commission is paid for that week."},
+    {n:9,title:"Enter the final amount into the weekly pay master sheet",meta:"",detail:"Enter the final payable bonus amount for each post-site team member into the weekly pay master sheet."},
+  ],
+  momentum:[
+    {n:1,title:"Open Zoho CRM → Reports → 'Post site and MS – appointments created last week'",meta:"",detail:"Navigate to Reports in Zoho CRM and open the report titled 'Post site and MS – appointments created last week'."},
+    {n:2,title:"Check each team member against the 20-session threshold",meta:"Before opening any templates",detail:"Before opening any individual templates, check each person's session count. Below 20 = no commission this week. Enter zero — never leave blank."},
+    {n:3,title:"For each eligible member: open their commission template",meta:"Momentum sessions commission templates folder",detail:"For each person who has met the 20-session threshold, open their individual commission template on ShareDrive."},
+    {n:4,title:"Duplicate the tab and rename with the Friday payment date",meta:"",detail:"Duplicate the previous tab and rename with the Friday payment date."},
+    {n:5,title:"Update the PAY DATE field",meta:"",detail:"Update the PAY DATE in the new tab."},
+    {n:6,title:"Enter the sessions count and referrals from the Zoho report",meta:"",detail:"Using the Zoho report figures, update the sessions count and referrals count for each employee."},
+    {n:7,title:"Enter the final amount into the master sheet",meta:"",detail:"Enter the final commission amount into the weekly pay master sheet. If below threshold, enter zero — never leave blank."},
+  ],
+  tristan:[
+    {n:1,title:"Open Tristan's individual commission template on ShareDrive",meta:"",detail:"Open Tristan's commission template from the post-site commission templates folder on ShareDrive."},
+    {n:2,title:"Duplicate the tab and rename with the Friday payment date",meta:"",detail:"Duplicate the previous tab and rename with the Friday payment date."},
+    {n:3,title:"Update the PAY DATE field",meta:"",detail:"Update the PAY DATE in the new tab."},
+    {n:4,title:"Complete the top half — Tristan's personal metrics",meta:"Reviews, panel cleaning, referrals — from the Zoho post-site dashboard",detail:"Using the Zoho CRM post-site dashboard, enter Tristan's own individual figures for reviews, panel cleaning, and referrals in the personal metrics section."},
+    {n:5,title:"Calculate the team activity bonus — excluding Tristan",meta:"30 reviews per active team member — Tristan's count excluded",detail:"For the team activity bonus, calculate the total reviews achieved by Tristan's team for the week. Tristan's own review count must NOT be included. Account for any team members on leave or working fewer days. The threshold is 30 reviews per active team member. Single flat value — no increment above threshold."},
+    {n:6,title:"Enter the final commission amount into the master sheet",meta:"",detail:"Enter Tristan's final commission amount into the weekly pay master sheet."},
+  ],
+};
+var feedback={
+  q1:{0:"The TrustPilot data feed may be delayed — unconfirmed figures could be incorrect.",1:"Never copy prior amounts — commission changes week to week.",2:"Correct. Always wait for Shannon's text confirmation. The TrustPilot feed can be delayed and early figures may be wrong."},
+  q2:{0:"18 sessions is below the 20-session minimum — no commission is payable without a public holiday exception.",1:"Correct. Below 20 sessions means no commission this week. Enter zero — never leave blank.",2:"Shannon confirmation is only needed for exceptions (e.g. public holiday). A standard below-threshold week requires no commission."},
+  q3:{0:"Tristan's personal metrics and his team's metrics are kept separate. His own count never goes into the team total.",1:"Correct. Tristan's own metrics are calculated separately. His personal achievements do not count toward the team activity bonus.",2:"The threshold calculation must exclude Tristan's count entirely — there is no condition under which his own reviews count toward the team total."},
+};
+
+function buildFlow(id,data){
+  var el=document.getElementById(id);
+  if(!el)return;
+  data.forEach(function(s,i){
+    var row=document.createElement('div');row.className='flow-row';
+    row.innerHTML='<div class="flow-num">'+s.n+'</div><div class="flow-content"><div class="flow-title">'+s.title+'</div><div class="flow-meta">'+s.meta+'</div></div><div class="flow-chevron"><i class="ti ti-chevron-down"></i></div>';
+    var detail=document.createElement('div');detail.className='flow-detail';detail.textContent=s.detail;
+    row.onclick=function(){
+      var open=detail.classList.contains('open');
+      el.querySelectorAll('.flow-row').forEach(function(r){r.classList.remove('active');});
+      el.querySelectorAll('.flow-detail').forEach(function(d){d.classList.remove('open');});
+      if(!open){row.classList.add('active');detail.classList.add('open');}
+    };
+    el.appendChild(row);el.appendChild(detail);
+  });
+}
+
+function switchTab(idx){
+  document.querySelectorAll('.tab').forEach(function(t,i){t.classList.toggle('active',i===idx);});
+  document.querySelectorAll('.tab-panel').forEach(function(p,i){p.classList.toggle('active',i===idx);});
+}
+
+function ans(qid,idx,correct){
+  var opts=document.querySelectorAll('#'+qid+' .opt');
+  opts.forEach(function(o){o.disabled=true;});
+  opts[correct].classList.add('correct');
+  if(idx!==correct)opts[idx].classList.add('wrong');
+  var fb=document.getElementById(qid+'-fb');
+  fb.textContent=(idx===correct?'Correct. ':'Not quite — correct answer highlighted. ')+feedback[qid][idx];
+  fb.className='fb show '+(idx===correct?'ok':'bad');
+}
+
+buildFlow('flow-postsite',flowData.postsite);
+buildFlow('flow-momentum',flowData.momentum);
+buildFlow('flow-tristan',flowData.tristan);
+</script>
+</body>
+</html>
