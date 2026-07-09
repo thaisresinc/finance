@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll Onboarding — Absences & Timesheets | RESINC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#F8FAFB;color:#1A202C;padding:0 0 3rem;}
+.hero{background:#0A3542;padding:1.75rem 1.5rem 2rem;}
+.hero-tag{background:rgba(0,174,239,.2);color:#00AEEF;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:10px;border:1px solid rgba(0,174,239,.3);}
+.hero-title{color:#fff;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+.hero-sub{color:rgba(255,255,255,.55);font-size:13px;line-height:1.5;}
+.body{padding:1.5rem;}
+.sec{margin-bottom:2rem;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.4rem;}
+.sec-icon{width:30px;height:30px;border-radius:8px;background:#0A3542;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sec-title{font-size:15px;font-weight:700;color:#0A3542;}
+.sec-sub{font-size:13px;color:#6B7E8F;margin-bottom:1rem;padding-left:40px;}
+.div{border:none;border-top:1px solid #E8EDF2;margin:2rem 0;}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;}
+.step{display:flex;cursor:pointer;}
+.step-left{display:flex;flex-direction:column;align-items:center;width:38px;flex-shrink:0;}
+.step-circle{width:30px;height:30px;border-radius:50%;background:#EBF5FF;border:1px solid #B5D4F4;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#185FA5;transition:all .2s;}
+.step.done .step-circle{background:#0A3542;border-color:#0A3542;color:#00AEEF;}
+.step-line{width:1.5px;background:#E8EDF2;flex:1;min-height:14px;}
+.step:last-child .step-line{display:none;}
+.step-right{flex:1;padding:0 0 18px 10px;}
+.step-title{font-size:13.5px;font-weight:600;color:#0A3542;margin-bottom:1px;padding-top:5px;}
+.step-meta{font-size:11.5px;color:#8899AA;}
+.step-detail{margin-top:8px;background:#fff;border:1px solid #E8EDF2;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#4A5568;line-height:1.6;display:none;}
+.step-detail.open{display:block;}
+.step-tag{display:inline-block;background:#EBF5FF;color:#185FA5;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;margin-bottom:6px;}
+
+/* ABSENCE MAPPER */
+.mapper{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;margin-bottom:.5rem;}
+.mapper-hdr{background:#0A3542;padding:.75rem 1.1rem;display:flex;align-items:center;gap:8px;}
+.mapper-title{color:#fff;font-size:13px;font-weight:600;}
+.mapper-sub{color:rgba(255,255,255,.45);font-size:11px;margin-left:auto;}
+.absence-row{display:flex;align-items:stretch;border-bottom:1px solid #E8EDF2;cursor:pointer;background:#fff;transition:background .12s;}
+.absence-row:last-child{border-bottom:none;}
+.absence-row:hover{background:#F7FAFC;}
+.absence-row.active{background:#EBF8FF;}
+.absence-left{padding:.75rem 1rem;flex:1;}
+.absence-type{font-size:13px;font-weight:600;color:#0A3542;}
+.absence-note{font-size:11.5px;color:#8899AA;margin-top:2px;}
+.absence-arrow{width:40px;display:flex;align-items:center;justify-content:center;color:#CBD5E0;font-size:14px;}
+.absence-col{padding:.75rem 1rem;min-width:160px;display:flex;align-items:center;}
+.col-badge{font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;border:1px solid #B5D4F4;background:#EBF5FF;color:#185FA5;}
+.absence-detail{padding:10px 14px 12px;border-top:1px solid #BAE6FD;font-size:12.5px;color:#0A3542;line-height:1.6;display:none;background:#EBF8FF;}
+.absence-detail.open{display:block;}
+
+/* SCENARIO CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1rem;}
+.scenario-card{border:1px solid #E8EDF2;border-radius:10px;background:#fff;cursor:pointer;transition:all .15s;overflow:hidden;}
+.scenario-card:hover{border-color:#B5D4F4;transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,174,239,.08);}
+.scenario-card.active{border-color:#00AEEF;box-shadow:0 3px 10px rgba(0,174,239,.12);}
+.sc-top{padding:12px 14px 10px;}
+.sc-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;font-size:14px;}
+.sc-title{font-size:13px;font-weight:600;color:#0A3542;line-height:1.3;margin-bottom:3px;}
+.sc-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;}
+.sc-detail{padding:10px 14px 12px;border-top:1px solid #E8EDF2;font-size:12px;color:#4A5568;line-height:1.6;display:none;background:#F7FAFC;}
+.sc-detail.open{display:block;}
+.sc-action{font-size:12px;font-weight:600;color:#0A3542;margin-bottom:4px;}
+
+.warn{background:#0A3542;border-radius:10px;padding:.9rem 1rem;margin-bottom:1rem;}
+.warn-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00AEEF;margin-bottom:5px;}
+.warn-text{font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.6;font-style:italic;}
+
+.quiz{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;background:#fff;}
+.quiz-hdr{background:#F8FAFB;padding:.65rem 1rem;font-size:11px;font-weight:700;color:#6B7E8F;display:flex;align-items:center;gap:7px;border-bottom:1px solid #E8EDF2;text-transform:uppercase;letter-spacing:.5px;}
+.q{padding:.9rem 1rem;border-bottom:1px solid #E8EDF2;}
+.q:last-child{border-bottom:none;}
+.q-text{font-size:14px;color:#0A3542;font-weight:600;margin-bottom:9px;line-height:1.4;}
+.opt{display:block;width:100%;text-align:left;background:#F8FAFB;border:1px solid #E8EDF2;border-radius:8px;padding:9px 12px;margin-bottom:5px;font-size:13px;color:#0A3542;cursor:pointer;font-family:inherit;transition:all .15s;}
+.opt:hover:not(:disabled){background:#EBF5FF;border-color:#B5D4F4;}
+.opt.correct{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;font-weight:600;}
+.opt.wrong{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
+.opt:disabled{cursor:default;}
+.fb{font-size:12px;margin-top:7px;padding:7px 10px;border-radius:7px;display:none;line-height:1.5;}
+.fb.show{display:block;}
+.fb.ok{background:#ECFDF5;color:#065F46;}
+.fb.bad{background:#FEF2F2;color:#991B1B;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Payroll onboarding</div>
+  <div class="hero-title">Absences and timesheets</div>
+  <div class="hero-sub">Every Monday, after electrician invoices. Pull two reports from Bright HR, map each absence to the right column, then cross-check the timesheet summary.</div>
+</div>
+
+<div class="body">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-file-download" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Generating the reports — click each step</div>
+  </div>
+  <div class="sec-sub">Two reports every Monday. Both come from the same place in Bright HR.</div>
+  <div class="steps" id="steps"></div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-arrows-exchange" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Absence mapper — click each type</div>
+  </div>
+  <div class="sec-sub">Each absence type maps to a specific column in the master sheet.</div>
+  <div class="mapper">
+    <div class="mapper-hdr">
+      <i class="ti ti-table" style="font-size:14px;color:#00AEEF;"></i>
+      <div class="mapper-title">Absence type — master sheet column</div>
+      <div class="mapper-sub">Click to expand</div>
+    </div>
+    <div id="mapper"></div>
+  </div>
+  <div style="font-size:11.5px;color:#8899AA;margin-top:6px;">After each entry, confirm that column 7 (total worked hours) has automatically deducted the absence hours.</div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-clock-check" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Timesheet summary rules — click each scenario</div>
+  </div>
+  <div class="sec-sub">Open the blip timesheet summary alongside the absence report. Click each scenario to see what to do.</div>
+  <div class="cards-grid" id="scenario-cards"></div>
+</div>
+
+<div class="warn">
+  <div class="warn-tag">Important</div>
+  <div class="warn-text">"The blip timesheet summary may not be 100% accurate — employees sometimes forget to clock in or out. Do not delay or reduce payment based on clock-in data alone. Column 15 (paid hours) must always reflect contracted hours — never change it without written authorisation from accounts."</div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-help-circle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Knowledge check</div>
+  </div>
+  <div class="quiz">
+    <div class="quiz-hdr"><i class="ti ti-writing" style="font-size:13px;"></i>3 questions</div>
+    <div class="q" id="q1">
+      <div class="q-text">A salaried employee clocked 32 hours with no leave recorded. What do you enter in column 15?</div>
+      <button class="opt" onclick="ans('q1',0,2)">32 hours — what they actually clocked</button>
+      <button class="opt" onclick="ans('q1',1,2)">35 hours — add a few to be safe</button>
+      <button class="opt" onclick="ans('q1',2,2)">38 hours — the contracted minimum</button>
+      <div class="fb" id="q1-fb"></div>
+    </div>
+    <div class="q" id="q2">
+      <div class="q-text">Personal leave appears in the absence report. Which column does it go into?</div>
+      <button class="opt" onclick="ans('q2',0,1)">Annual leave hours column</button>
+      <button class="opt" onclick="ans('q2',1,1)">Sick pay hours column</button>
+      <button class="opt" onclick="ans('q2',2,1)">Unpaid hours column</button>
+      <div class="fb" id="q2-fb"></div>
+    </div>
+    <div class="q" id="q3">
+      <div class="q-text">An employee is on a public holiday but their state differs from the main office. What do you check first?</div>
+      <button class="opt" onclick="ans('q3',0,1)">Whether they clocked in that day</button>
+      <button class="opt" onclick="ans('q3',1,1)">Which state the employee works in — column 4 of the master sheet</button>
+      <button class="opt" onclick="ans('q3',2,1)">Whether their manager approved the day off</button>
+      <div class="fb" id="q3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var steps = [
+  {n:1, title:"Open Bright HR and go to Payroll", meta:"Left sidebar", tag:"Bright HR", detail:"Log into Bright HR. Navigate to Payroll in the left sidebar."},
+  {n:2, title:"Set the payroll period", meta:"Previous Monday to Sunday", tag:"Date range", detail:"Set the date range to the previous week — Monday to Sunday. This captures all absences from the completed work week."},
+  {n:3, title:"Select Include terminated employees", meta:"Tick the positive option", tag:"Setting", detail:"Tick the option to include terminated employees. This ensures anyone whose final week falls in this period is captured for their final pay."},
+  {n:4, title:"Select both reports", meta:"Absence report + Blip timesheet summary", tag:"Two reports", detail:"Under Select report to support your payroll, select both: the Absence report AND the Blip timesheet summary. You need both."},
+  {n:5, title:"Generate and download both reports", meta:"Click Generate, then Run payroll report", tag:"Download", detail:"Click Generate payroll reports, then Run payroll report. Download both files and save them to the current week's working folder on ShareDrive."},
+  {n:6, title:"Format the absence report", meta:"Sort A-Z, hide columns D-J, N-U, X-AB", tag:"Formatting", detail:"Open the absence report. Sort alphabetically. Hide columns D to J, N to U, and X to AB. This leaves only the columns you need — absence type (col K) and total hours deducted (col AC)."}
+];
+
+var absences = [
+  {type:"Annual leave", note:"Approved time off", col:"Annual leave hours column", detail:"Enter the number of annual leave hours. Column 7 should auto-deduct these from expected hours."},
+  {type:"Personal / carer's leave", note:"Includes sick days and caring for a family member", col:"Sick pay hours column", detail:"Personal and carer's leave both go into the sick pay column — not annual leave. Managers approve these in Bright HR and they appear as a single type in the report."},
+  {type:"Leave without pay", note:"Unpaid absence", col:"Unpaid hours column", detail:"Enter hours into the unpaid column. This reduces the employee's gross pay. Confirm the leave was genuinely unpaid before entering."},
+  {type:"Public holiday", note:"State-specific — check employee's state first", col:"Public holiday hours column", detail:"Before entering public holiday hours, confirm which state the employee works in. Not all states share the same public holidays. Check column 4 of the master sheet or their Bright HR profile."}
+];
+
+var scenarios = [
+  {icon:"", iconBg:"#EBF5FF", badgeBg:"#EBF5FF", badgeColor:"#185FA5", badge:"No action", title:"Salaried — hours match expected", action:"No action required.", detail:"Hours are in line with contracted hours after accounting for any leave. Column 15 stays as contracted hours."},
+  {icon:"", iconBg:"#ECFDF5", badgeBg:"#ECFDF5", badgeColor:"#065F46", badge:"Pay 38h", title:"Salaried — hours below 38h, no leave", action:"Record 38h in column 15.", detail:"Australian law requires a minimum of 38h paid for salaried employees. Do not reduce column 15 based on clock-in data alone."},
+  {icon:"", iconBg:"#ECFDF5", badgeBg:"#ECFDF5", badgeColor:"#065F46", badge:"Pay 38h only", title:"Salaried — hours above 38h, no OT entitlement", action:"Record 38h only in column 15.", detail:"Salaried employees without overtime entitlement are not paid for hours above 38. Column 15 stays at contracted hours."},
+  {icon:"", iconBg:"#FFFBEB", badgeBg:"#FFFBEB", badgeColor:"#92400E", badge:"Use invoice hours", title:"Electrician — hours above 38h", action:"Record actual approved hours from invoice.", detail:"Electricians are the only group eligible for overtime. Use the Copilot-calculated hours from the approved invoice processed in the previous step."},
+  {icon:"", iconBg:"#F5F3FF", badgeBg:"#F5F3FF", badgeColor:"#6D28D9", badge:"Check state", title:"Public holiday — hours appear missing", action:"Check the employee's state first.", detail:"Not all states share the same public holidays. Check column 4 of the master sheet or the employee's Bright HR profile before taking any action."},
+  {icon:"", iconBg:"#FEF2F2", badgeBg:"#FEF2F2", badgeColor:"#991B1B", badge:"Escalate", title:"Unexplained significant discrepancy", action:"Contact the relevant manager.", detail:"If hours appear significantly off and you cannot explain it through leave or public holidays, contact the manager before locking the hours. Allow time for a response before the Tuesday send deadline."}
+];
+
+function buildSteps() {
+  var el = document.getElementById('steps');
+  steps.forEach(function(s, i) {
+    var wrap = document.createElement('div');
+    wrap.className = 'step';
+    wrap.dataset.idx = i;
+    var left = document.createElement('div');
+    left.className = 'step-left';
+    var circle = document.createElement('div');
+    circle.className = 'step-circle';
+    circle.textContent = s.n;
+    var line = document.createElement('div');
+    line.className = 'step-line';
+    left.appendChild(circle);
+    left.appendChild(line);
+    var right = document.createElement('div');
+    right.className = 'step-right';
+    right.innerHTML = '<div class="step-title">' + s.title + '</div><div class="step-meta">' + s.meta + '</div>';
+    var detail = document.createElement('div');
+    detail.className = 'step-detail';
+    detail.innerHTML = (s.tag ? '<div class="step-tag">' + s.tag + '</div>' : '') + s.detail;
+    right.appendChild(detail);
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    wrap.onclick = function() {
+      var open = detail.classList.contains('open');
+      document.querySelectorAll('.step-detail').forEach(function(d) { d.classList.remove('open'); });
+      document.querySelectorAll('.step').forEach(function(r) { r.classList.remove('done'); r.querySelector('.step-circle').textContent = steps[parseInt(r.dataset.idx)].n; });
+      if (!open) { detail.classList.add('open'); wrap.classList.add('done'); circle.innerHTML = '<i class="ti ti-check" style="font-size:13px;"></i>'; }
+    };
+    el.appendChild(wrap);
+    el.appendChild(detail);
+  });
+}
+
+function buildMapper() {
+  var el = document.getElementById('mapper');
+  absences.forEach(function(a) {
+    var row = document.createElement('div');
+    row.className = 'absence-row';
+    row.innerHTML = '<div class="absence-left"><div class="absence-type">' + a.type + '</div><div class="absence-note">' + a.note + '</div></div><div class="absence-arrow"><i class="ti ti-arrow-right"></i></div><div class="absence-col"><span class="col-badge">' + a.col + '</span></div>';
+    var detail = document.createElement('div');
+    detail.className = 'absence-detail';
+    detail.textContent = a.detail;
+    row.onclick = function() {
+      var open = detail.classList.contains('open');
+      document.querySelectorAll('.absence-row').forEach(function(r) { r.classList.remove('active'); });
+      document.querySelectorAll('.absence-detail').forEach(function(d) { d.classList.remove('open'); });
+      if (!open) { row.classList.add('active'); detail.classList.add('open'); }
+    };
+    el.appendChild(row);
+    el.appendChild(detail);
+  });
+}
+
+function buildScenarioCards() {
+  var grid = document.getElementById('scenario-cards');
+  scenarios.forEach(function(s, i) {
+    var card = document.createElement('div');
+    card.className = 'scenario-card';
+    card.innerHTML =
+      '<div class="sc-top">' +
+        '<div class="sc-icon" style="background:' + s.iconBg + '"><i class="ti ti-clock" style="font-size:14px;color:' + s.badgeColor + ';"></i></div>' +
+        '<div class="sc-title">' + s.title + '</div>' +
+        '<span class="sc-badge" style="background:' + s.badgeBg + ';color:' + s.badgeColor + ';">' + s.badge + '</span>' +
+      '</div>' +
+      '<div class="sc-detail" id="sc-detail-' + i + '">' +
+        '<div class="sc-action">' + s.action + '</div>' +
+        s.detail +
+      '</div>';
+    card.onclick = function() {
+      var detail = document.getElementById('sc-detail-' + i);
+      var open = detail.classList.contains('open');
+      document.querySelectorAll('.scenario-card').forEach(function(c) { c.classList.remove('active'); });
+      document.querySelectorAll('.sc-detail').forEach(function(d) { d.classList.remove('open'); });
+      if (!open) { card.classList.add('active'); detail.classList.add('open'); }
+    };
+    grid.appendChild(card);
+  });
+}
+
+var feedback = {
+  q1: {0:"Not quite — salaried employees are always paid a minimum of 38h regardless of clock-in data.", 1:"Never add hours that don't correspond to worked or leave hours.", 2:"Correct. Salaried employees always receive a minimum of 38h. Column 15 stays at contracted hours."},
+  q2: {0:"Annual leave is for approved holiday, not sick or personal leave.", 1:"Correct. Personal and carer's leave go into the sick pay column. They appear as a single type in the Bright HR report.", 2:"Leave without pay is for unpaid absences. Personal leave is a paid entitlement."},
+  q3: {0:"Clock-in data does not determine public holiday entitlement.", 1:"Correct. Public holidays are state-specific. Check the employee's state in column 4 or their Bright HR profile.", 2:"Manager approval is for leave requests, not for determining which public holiday applies."}
+};
+
+function ans(qid, idx, correct) {
+  var opts = document.querySelectorAll('#' + qid + ' .opt');
+  opts.forEach(function(o) { o.disabled = true; });
+  opts[correct].classList.add('correct');
+  if (idx !== correct) opts[idx].classList.add('wrong');
+  var fb = document.getElementById(qid + '-fb');
+  fb.textContent = (idx === correct ? 'Correct. ' : 'Not quite — correct answer highlighted. ') + feedback[qid][idx];
+  fb.className = 'fb show ' + (idx === correct ? 'ok' : 'bad');
+}
+
+buildSteps();
+buildMapper();
+buildScenarioCards();
+</script>
+</body>
+</html>
