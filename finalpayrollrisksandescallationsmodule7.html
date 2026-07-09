@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll Onboarding — Module 7 | RESINC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#F8FAFB;color:#1A202C;padding:0 0 3rem;}
+.hero{background:#0A3542;padding:1.75rem 1.5rem 2rem;}
+.hero-tag{background:rgba(0,174,239,.2);color:#00AEEF;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:10px;border:1px solid rgba(0,174,239,.3);}
+.hero-title{color:#fff;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+.hero-sub{color:rgba(255,255,255,.55);font-size:13px;line-height:1.5;}
+.vid-row{background:#fff;border-bottom:1px solid #E8EDF2;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.vid-play{width:42px;height:42px;border-radius:50%;background:#00AEEF;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:none;cursor:pointer;}
+.vid-title{font-size:14px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.vid-sub{font-size:12px;color:#8899AA;}
+.body{padding:1.5rem;}
+.sec{margin-bottom:2rem;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.4rem;}
+.sec-icon{width:30px;height:30px;border-radius:8px;background:#0A3542;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sec-title{font-size:15px;font-weight:700;color:#0A3542;}
+.sec-sub{font-size:13px;color:#6B7E8F;margin-bottom:1rem;padding-left:40px;}
+.div{border:none;border-top:1px solid #E8EDF2;margin:2rem 0;}
+
+.rule-list{display:flex;flex-direction:column;gap:7px;margin-bottom:1rem;}
+.rule-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:8px;background:#fff;border:1px solid #E8EDF2;border-left:3px solid #00AEEF;}
+.rule-n{font-size:10.5px;font-weight:700;color:#00AEEF;min-width:20px;margin-top:2px;}
+.rule-t{font-size:12.5px;color:#1A202C;line-height:1.5;}
+
+.risk-table{width:100%;border-collapse:separate;border-spacing:0 6px;}
+.risk-table th{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8899AA;padding:0 12px 4px;text-align:left;}
+.risk-row td{padding:10px 12px;font-size:12.5px;background:#fff;color:#1A202C;line-height:1.4;}
+.risk-row td:first-child{border-radius:8px 0 0 8px;font-weight:600;width:28%;border-left:1px solid #E8EDF2;border-top:1px solid #E8EDF2;border-bottom:1px solid #E8EDF2;}
+.risk-row td:nth-child(2){width:10%;border-top:1px solid #E8EDF2;border-bottom:1px solid #E8EDF2;}
+.risk-row td:last-child{border-radius:0 8px 8px 0;color:#4A5568;border-right:1px solid #E8EDF2;border-top:1px solid #E8EDF2;border-bottom:1px solid #E8EDF2;}
+.sev{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;}
+.sev-h{background:#FEE2E2;color:#B91C1C;}
+.sev-m{background:#FEF3C7;color:#B45309;}
+.sev-l{background:#DCFCE7;color:#166534;}
+
+.esc-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
+.esc-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:8px;background:#FEF2F2;border:1px solid #FECACA;}
+.esc-icon{width:28px;height:28px;border-radius:6px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.esc-text{font-size:12.5px;color:#7F1D1D;line-height:1.5;}
+.esc-text strong{color:#991B1B;}
+
+.complete-banner{background:#0A3542;border-radius:12px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.complete-icon{width:44px;height:44px;border-radius:50%;background:#00AEEF;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.complete-title{color:#fff;font-size:15px;font-weight:700;margin-bottom:3px;}
+.complete-sub{color:rgba(255,255,255,.55);font-size:12px;line-height:1.5;}
+
+.quiz{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;background:#fff;}
+.quiz-hdr{background:#F8FAFB;padding:.65rem 1rem;font-size:11px;font-weight:700;color:#6B7E8F;display:flex;align-items:center;gap:7px;border-bottom:1px solid #E8EDF2;text-transform:uppercase;letter-spacing:.5px;}
+.q{padding:.9rem 1rem;border-bottom:1px solid #E8EDF2;}
+.q:last-child{border-bottom:none;}
+.q-text{font-size:14px;color:#0A3542;font-weight:600;margin-bottom:9px;line-height:1.4;}
+.opt{display:block;width:100%;text-align:left;background:#F8FAFB;border:1px solid #E8EDF2;border-radius:8px;padding:9px 12px;margin-bottom:5px;font-size:13px;color:#0A3542;cursor:pointer;font-family:inherit;transition:all .15s;}
+.opt:hover:not(:disabled){background:#EBF5FF;border-color:#B5D4F4;}
+.opt.correct{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;font-weight:600;}
+.opt.wrong{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
+.opt:disabled{cursor:default;}
+.fb{font-size:12px;margin-top:7px;padding:7px 10px;border-radius:7px;display:none;line-height:1.5;}
+.fb.show{display:block;}
+.fb.ok{background:#ECFDF5;color:#065F46;}
+.fb.bad{background:#FEF2F2;color:#991B1B;}
+
+.score-banner{background:#ECFDF5;border:1px solid #6EE7B7;border-radius:10px;padding:1rem 1.25rem;text-align:center;display:none;margin-top:1rem;}
+.score-banner.show{display:block;}
+.score-val{font-size:28px;font-weight:700;color:#065F46;margin-bottom:4px;}
+.score-sub{font-size:13px;color:#166534;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Payroll onboarding</div>
+  <div class="hero-title">Rules, risks &amp; escalation</div>
+  <div class="hero-sub">The non-negotiables. Know these before your first Monday morning — they are the safety net for the entire payroll process.</div>
+</div>
+
+</div>
+
+<div class="body">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-shield-check" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Validation rules — the non-negotiables</div>
+  </div>
+  <div class="sec-sub">These apply to every pay cycle without exception. No workarounds.</div>
+  <div class="rule-list" id="rules"></div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-alert-triangle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Common risks</div>
+  </div>
+  <div class="sec-sub">The most likely things to go wrong — and how they typically happen.</div>
+  <table class="risk-table">
+    <thead><tr><th>Risk</th><th>Severity</th><th>How it typically occurs</th></tr></thead>
+    <tbody id="risks"></tbody>
+  </table>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-phone-call" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">When to escalate — stop and call</div>
+  </div>
+  <div class="sec-sub">If any of these happen, stop what you're doing and escalate immediately.</div>
+  <div class="esc-list" id="escalate"></div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-help-circle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Final quiz — all modules</div>
+  </div>
+  <div class="sec-sub">5 questions covering the full payroll cycle.</div>
+  <div class="quiz">
+    <div class="quiz-hdr"><i class="ti ti-writing" style="font-size:13px;"></i>5 questions — pass mark 4 out of 5</div>
+    <div class="q" id="q1">
+      <div class="q-text">Which employee group is the only one eligible for overtime?</div>
+      <button class="opt" onclick="ans('q1',0,2)">All full-time employees who work more than 38h</button>
+      <button class="opt" onclick="ans('q1',1,2)">Part-time employees on approved overtime</button>
+      <button class="opt" onclick="ans('q1',2,2)">Electricians only — identified by green rows in the master sheet</button>
+      <div class="fb" id="q1-fb"></div>
+    </div>
+    <div class="q" id="q2">
+      <div class="q-text">An electrician's invoice is not in the inbox Monday morning. What do you record?</div>
+      <button class="opt" onclick="ans('q2',0,1)">Wait until the invoice arrives before processing</button>
+      <button class="opt" onclick="ans('q2',1,1)">38 hours — no exceptions, no waiting</button>
+      <button class="opt" onclick="ans('q2',2,1)">Contact the electrician and ask them to submit urgently</button>
+      <div class="fb" id="q2-fb"></div>
+    </div>
+    <div class="q" id="q3">
+      <div class="q-text">Bright HR shows $28/hr for a new starter. Their signed contract shows $30/hr. Which do you use?</div>
+      <button class="opt" onclick="ans('q3',0,1)">$28 — the system is the most current record</button>
+      <button class="opt" onclick="ans('q3',1,1)">$30 — the signed contract is always the source of truth</button>
+      <button class="opt" onclick="ans('q3',2,1)">$29 — average and flag for review</button>
+      <div class="fb" id="q3-fb"></div>
+    </div>
+    <div class="q" id="q4">
+      <div class="q-text">Where do prior-week corrections always go?</div>
+      <button class="opt" onclick="ans('q4',0,1)">Added to the current week's master sheet row for the employee</button>
+      <button class="opt" onclick="ans('q4',1,1)">In the accounts email — clearly listed with name, week, hours, and reason</button>
+      <button class="opt" onclick="ans('q4',2,1)">Held over until the following Monday</button>
+      <div class="fb" id="q4-fb"></div>
+    </div>
+    <div class="q" id="q5">
+      <div class="q-text">Leigh is unavailable Thursday afternoon and the 4pm deadline is approaching. What do you do?</div>
+      <button class="opt" onclick="ans('q5',0,1)">Submit the payment anyway — it's been prepared correctly</button>
+      <button class="opt" onclick="ans('q5',1,1)">Escalate to Jacqui immediately — never submit without an authorised approver</button>
+      <button class="opt" onclick="ans('q5',2,1)">Wait until Friday morning and try again</button>
+      <div class="fb" id="q5-fb"></div>
+    </div>
+  </div>
+  <div class="score-banner" id="score-banner">
+    <div class="score-val" id="score-val"></div>
+    <div class="score-sub" id="score-sub"></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="complete-banner">
+  <div class="complete-icon"><i class="ti ti-trophy" style="font-size:20px;color:white;"></i></div>
+  <div>
+    <div class="complete-title">Course complete — well done!</div>
+    <div class="complete-sub">You've completed all 7 modules of the Resinc payroll onboarding course. Your first Monday morning starts here. If you ever need a refresher, each module stays available in Zoho Learn.</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var rules=[
+  {n:"01",t:"Every employee row in the master sheet must be complete before sending to accounts — no blank rows for active employees."},
+  {n:"02",t:"Paid hours (column 15) must always reflect contracted hours and must never be manually overridden without written authorisation from accounts."},
+  {n:"03",t:"Salaried employees must always be paid a minimum of 38 hours per week."},
+  {n:"04",t:"Overtime applies to electricians only. No other employee type receives overtime regardless of hours clocked."},
+  {n:"05",t:"If an invoice is not received by Monday morning, 38 hours is applied. Finance does not chase. If the electrician submits the invoice in a later cycle, the correction is processed in the next cycle after it is received."},
+  {n:"06",t:"All bonus and commission entries must correspond to a written approval. Verbal confirmation is not sufficient."},
+  {n:"07",t:"Pre-tax deductions must be supported by written documentation before being applied or changed."},
+  {n:"08",t:"Bank detail changes must be confirmed in writing directly by the employee before being updated in Xero."},
+  {n:"09",t:"The pay run is prepared by payroll and approved by Leigh. The same person cannot prepare and approve the payment."},
+];
+
+var risks=[
+  {risk:"Incorrect hours — salaried staff",sev:"h",how:"Timesheet discrepancies not identified before sending to accounts. Always cross-reference absence report and timesheet summary."},
+  {risk:"Missing electrician invoices",sev:"h",how:"Electricians do not submit by Monday AM. Default 38h applied — no retroactive correction."},
+  {risk:"Bonus email not received Monday",sev:"h",how:"Team leader does not send the weekly approval. Contact Casey or Jordan before processing — never assume zero."},
+  {risk:"Leave balance discrepancy",sev:"m",how:"Balance in Bright HR incorrect or not updated. Flag significant discrepancies to accounts before sending."},
+  {risk:"New starter missing from sheet",sev:"m",how:"HR does not update the new starters spreadsheet before Friday. Check with Shaun or Ellie if a known new starter is absent."},
+  {risk:"Commission data delayed",sev:"m",how:"TrustPilot data feed delayed — post-site team. Do not process until Shannon confirms accuracy."},
+  {risk:"Terminated employee paid",sev:"m",how:"Employee not marked red in master sheet. Update colour coding on the last cycle they appear."},
+  {risk:"Incorrect bank details in Xero",sev:"l",how:"Bank details changed or contain a typo. Jacqui receives email notification from Commonwealth Bank, calls the employee, updates Xero, and processes a separate payment."},
+];
+
+var escalate=[
+  "Pay rate discrepancy cannot be resolved before Tuesday — escalate to Jacqui",
+  "Bonus approval not received and manager is uncontactable by Monday morning",
+  "Leigh unavailable Thursday before 4pm — escalate to Jacqui immediately",
+  "Accounts sheet not returned by Wednesday morning",
+  "Payment fails after submission — contact Jacqui and accounts immediately",
+  "An employee disputes their pay — do not attempt to resolve without Jacqui",
+  "Special employee arrangement not documented and you're unsure how to process it",
+];
+
+var answers={q1:2,q2:1,q3:1,q4:1,q5:1};
+var feedback={
+  q1:{0:"Not quite — all salaried employees are paid a minimum of 38h regardless of hours. Only electricians (green rows) receive overtime.",1:"Part-time employees are not eligible for overtime.",2:"Correct. Electricians are the only group eligible for overtime — identified by green row colour coding."},
+  q2:{0:"Never wait — payroll does not chase late invoices. Apply 38h and move on.",1:"Correct. 38 hours, no exceptions, no waiting. Finance does not chase. If the electrician submits the invoice later, process the correction in the next cycle after receiving it.",2:"Correct approach on no chasing — but still apply 38h and note the name. If the invoice arrives later, process in the next cycle after receiving it."},
+  q3:{0:"Bright HR pay details may not reflect the most recently signed agreement.",1:"Correct. The signed contract is always the source of truth. Flag the discrepancy to accounts.",2:"Never average — use the contract figure and flag the discrepancy."},
+  q4:{0:"Never add corrections to the current week's master sheet row — this overpays the employee for the current week.",1:"Correct. Prior-week corrections always go in the accounts email — never in the master sheet.",2:"Finance does not chase. If the electrician submits late, the correction is processed in the next cycle after receiving it."},
+  q5:{0:"Never submit without an authorised approver — even if everything is prepared correctly.",1:"Correct. Escalate to Jacqui immediately. The 4pm deadline means there is no time to wait.",2:"Friday morning is too late — the deadline is 4pm Thursday. Escalate immediately."},
+};
+
+var answered={};
+var score=0;
+var total=5;
+
+function buildRules(){
+  var el=document.getElementById('rules');
+  rules.forEach(function(r){
+    var div=document.createElement('div');div.className='rule-item';
+    div.innerHTML='<div class="rule-n">'+r.n+'</div><div class="rule-t">'+r.t+'</div>';
+    el.appendChild(div);
+  });
+}
+
+function buildRisks(){
+  var el=document.getElementById('risks');
+  risks.forEach(function(r){
+    var tr=document.createElement('tr');tr.className='risk-row';
+    var sevLabel=r.sev==='h'?'High':r.sev==='m'?'Medium':'Low';
+    var sevClass='sev-'+r.sev;
+    tr.innerHTML='<td>'+r.risk+'</td><td><span class="sev '+sevClass+'">'+sevLabel+'</span></td><td>'+r.how+'</td>';
+    el.appendChild(tr);
+  });
+}
+
+function buildEscalate(){
+  var el=document.getElementById('escalate');
+  escalate.forEach(function(e){
+    var div=document.createElement('div');div.className='esc-item';
+    div.innerHTML='<div class="esc-icon"><i class="ti ti-alert-triangle" style="font-size:14px;color:#991B1B;"></i></div><div class="esc-text">'+e+'</div>';
+    el.appendChild(div);
+  });
+}
+
+function ans(qid,idx,correct){
+  if(answered[qid])return;
+  answered[qid]=true;
+  var opts=document.querySelectorAll('#'+qid+' .opt');
+  opts.forEach(function(o){o.disabled=true;});
+  opts[correct].classList.add('correct');
+  if(idx!==correct)opts[idx].classList.add('wrong');
+  var fb=document.getElementById(qid+'-fb');
+  var isCorrect=idx===correct;
+  if(isCorrect)score++;
+  fb.textContent=(isCorrect?'Correct. ':'Not quite — correct answer highlighted. ')+feedback[qid][idx];
+  fb.className='fb show '+(isCorrect?'ok':'bad');
+  if(Object.keys(answered).length===total){
+    var banner=document.getElementById('score-banner');
+    var val=document.getElementById('score-val');
+    var sub=document.getElementById('score-sub');
+    val.textContent=score+' / '+total;
+    if(score>=4){
+      sub.textContent='Pass — well done. You\'re ready for your first Monday morning.';
+      banner.style.background='#ECFDF5';banner.style.borderColor='#6EE7B7';
+      val.style.color='#065F46';sub.style.color='#166534';
+    } else {
+      sub.textContent='Not quite — review the modules where you missed questions and try again.';
+      banner.style.background='#FEF2F2';banner.style.borderColor='#FECACA';
+      val.style.color='#991B1B';sub.style.color='#7F1D1D';
+    }
+    banner.classList.add('show');
+  }
+}
+
+buildRules();buildRisks();buildEscalate();
+</script>
+</body>
+</html>
