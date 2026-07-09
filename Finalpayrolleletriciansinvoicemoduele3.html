@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll Onboarding — Electrician Invoice Processing | RESINC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#F8FAFB;color:#1A202C;padding:0 0 3rem;}
+.hero{background:#0A3542;padding:1.75rem 1.5rem 2rem;}
+.hero-tag{background:rgba(0,174,239,.2);color:#00AEEF;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:10px;border:1px solid rgba(0,174,239,.3);}
+.hero-title{color:#fff;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+.hero-sub{color:rgba(255,255,255,.55);font-size:13px;line-height:1.5;}
+.body{padding:1.5rem;}
+.sec{margin-bottom:2rem;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.4rem;}
+.sec-icon{width:30px;height:30px;border-radius:8px;background:#0A3542;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sec-title{font-size:15px;font-weight:700;color:#0A3542;}
+.sec-sub{font-size:13px;color:#6B7E8F;margin-bottom:1rem;padding-left:40px;}
+.div{border:none;border-top:1px solid #E8EDF2;margin:2rem 0;}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem;}
+.stat{background:#EDF2F7;border-radius:8px;padding:1rem;}
+.stat-val{font-size:26px;font-weight:700;color:#00AEEF;line-height:1;margin-bottom:4px;}
+.stat-lbl{font-size:12px;color:#4A5568;line-height:1.4;}
+.stat-sub{font-size:11px;color:#718096;margin-top:3px;}
+
+.interactive{background:#fff;border:1px solid #E8EDF2;border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;}
+.slider-label{font-size:12px;font-weight:600;color:#4A5568;margin-bottom:8px;}
+.slider-row{display:flex;align-items:center;gap:12px;margin-bottom:1rem;}
+.slider-row input[type=range]{flex:1;-webkit-appearance:none;height:4px;background:#E8EDF2;border-radius:2px;outline:none;}
+.slider-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#00AEEF;cursor:pointer;}
+.slider-val{font-size:20px;font-weight:700;color:#1A202C;min-width:28px;text-align:right;}
+.scenario{border-radius:8px;padding:1rem 1.1rem;}
+.scenario-status{font-size:13px;font-weight:700;margin-bottom:6px;}
+.scenario-body{font-size:12.5px;line-height:1.6;color:#4A5568;margin-bottom:10px;}
+.scenario-actions{display:flex;flex-direction:column;gap:5px;}
+.action-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;}
+.action-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;}
+
+.copilot{border-radius:12px;overflow:hidden;border:1px solid #E8EDF2;margin-bottom:1.5rem;}
+.copilot-header{background:#0A3542;padding:.75rem 1.1rem;display:flex;align-items:center;gap:8px;}
+.copilot-title{color:#fff;font-size:13px;font-weight:600;}
+.copilot-sub{color:rgba(255,255,255,.45);font-size:11px;margin-left:auto;}
+.rule-row{display:flex;align-items:stretch;border-bottom:1px solid #E8EDF2;cursor:pointer;background:#fff;}
+.rule-row:last-child{border-bottom:none;}
+.rule-row:hover{background:#F7FAFC;}
+.rule-left{padding:.85rem 1.1rem;flex:1;}
+.rule-name{font-size:13px;font-weight:600;color:#1A202C;margin-bottom:2px;}
+.rule-tag{font-size:11px;color:#6B7E8F;}
+.rule-expand{width:44px;display:flex;align-items:center;justify-content:center;color:#CBD5E0;font-size:16px;flex-shrink:0;}
+.rule-detail{background:#F7FAFC;padding:.85rem 1.1rem;font-size:12.5px;color:#4A5568;line-height:1.6;border-top:1px solid #E8EDF2;display:none;}
+.rule-detail.open{display:block;}
+.rule-example{margin-top:8px;background:#fff;border-left:3px solid #00AEEF;padding:8px 10px;font-size:12px;color:#1A202C;}
+
+.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;}
+.do-col{background:#F0FDF4;border-radius:12px;padding:1rem 1.1rem;border:1px solid #86EFAC;}
+.dont-col{background:#FEF2F2;border-radius:12px;padding:1rem 1.1rem;border:1px solid #FECACA;}
+.dd-title{font-size:12px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.do-col .dd-title{color:#166534;}
+.dont-col .dd-title{color:#991B1B;}
+.dd-item{font-size:12px;line-height:1.5;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;gap:8px;}
+.dd-item:last-child{border-bottom:none;padding-bottom:0;}
+.do-col .dd-item{color:#166534;}
+.dont-col .dd-item{color:#991B1B;}
+
+.callout{background:#0A3542;border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.5rem;}
+.callout-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00AEEF;margin-bottom:6px;}
+.callout-body{font-size:13px;color:rgba(255,255,255,.85);line-height:1.7;font-style:italic;}
+
+.quiz{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;background:#fff;}
+.quiz-hdr{background:#F8FAFB;padding:.65rem 1rem;font-size:11px;font-weight:700;color:#6B7E8F;display:flex;align-items:center;gap:7px;border-bottom:1px solid #E8EDF2;text-transform:uppercase;letter-spacing:.5px;}
+.q{padding:.9rem 1rem;border-bottom:1px solid #E8EDF2;}
+.q:last-child{border-bottom:none;}
+.q-text{font-size:14px;color:#0A3542;font-weight:600;margin-bottom:9px;line-height:1.4;}
+.opt{display:block;width:100%;text-align:left;background:#F8FAFB;border:1px solid #E8EDF2;border-radius:8px;padding:9px 12px;margin-bottom:5px;font-size:13px;color:#0A3542;cursor:pointer;font-family:inherit;transition:all .15s;}
+.opt:hover:not(:disabled){background:#EBF5FF;border-color:#B5D4F4;}
+.opt.correct{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;font-weight:600;}
+.opt.wrong{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
+.opt:disabled{cursor:default;}
+.fb{font-size:12px;margin-top:7px;padding:7px 10px;border-radius:7px;display:none;line-height:1.5;}
+.fb.show{display:block;}
+.fb.ok{background:#ECFDF5;color:#065F46;}
+.fb.bad{background:#FEF2F2;color:#991B1B;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Payroll onboarding</div>
+  <div class="hero-title">Electrician invoice processing</div>
+  <div class="hero-sub">Every Monday morning, before anything else. Electricians submit invoices by email — your job is to calculate hours via Copilot and enter them into the master sheet.</div>
+</div>
+
+<div class="body">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-info-circle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">The big picture</div>
+  </div>
+  <div class="sec-sub">Electricians don't use Bright HR like everyone else. They submit a weekly invoice by email each Monday morning.</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">38h</div><div class="stat-lbl">Default if no invoice received</div><div class="stat-sub">No exceptions, no waiting</div></div>
+    <div class="stat"><div class="stat-val">Mon AM</div><div class="stat-lbl">Submission deadline</div><div class="stat-sub">Fri night to Mon AM window</div></div>
+    <div class="stat"><div class="stat-val">Copilot</div><div class="stat-lbl">Always used for calculations</div><div class="stat-sub">Never calculate manually</div></div>
+    <div class="stat"><div class="stat-val">Green</div><div class="stat-lbl">Rows in master sheet</div><div class="stat-sub">Only group eligible for OT</div></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-adjustments-horizontal" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Scenario explorer</div>
+  </div>
+  <div class="sec-sub">Drag the slider to set how many invoices arrived. See exactly what to do.</div>
+  <div class="interactive">
+    <div class="slider-label">Invoices received this week</div>
+    <div class="slider-row">
+      <span style="font-size:13px;color:#4A5568;">0</span>
+      <input type="range" min="0" max="20" value="16" step="1" id="inv-slider" oninput="updateScenario(this.value)">
+      <span style="font-size:13px;color:#4A5568;">20+</span>
+      <div class="slider-val" id="inv-val">16</div>
+    </div>
+    <div id="inv-scenario"></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-robot" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Copilot rules — click each one</div>
+  </div>
+  <div class="sec-sub">Copilot is configured with Resinc pay rules. Always confirm these are reflected in the output before recording hours.</div>
+  <div class="copilot">
+    <div class="copilot-header">
+      <i class="ti ti-robot" style="font-size:15px;color:#00AEEF;"></i>
+      <div class="copilot-title">Microsoft Copilot — Resinc pay rules</div>
+      <div class="copilot-sub">Tap a rule to see an example</div>
+    </div>
+    <div id="copilot-rules"></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-check" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Do this / not this</div>
+  </div>
+  <div class="dos-donts">
+    <div class="do-col">
+      <div class="dd-title"><i class="ti ti-check" style="font-size:14px;"></i>Do this</div>
+      <div class="dd-item"><i class="ti ti-check" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Confirm invoice is approved by Luke or Aidan before entering</div>
+      <div class="dd-item"><i class="ti ti-check" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Record 38h for missing invoices — no exceptions, no waiting</div>
+      <div class="dd-item"><i class="ti ti-check" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Use Copilot for every calculation — always</div>
+      <div class="dd-item"><i class="ti ti-check" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Put prior-week corrections in the accounts email only</div>
+      <div class="dd-item"><i class="ti ti-check" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Confirm all green rows are filled before sending to accounts</div>
+    </div>
+    <div class="dont-col">
+      <div class="dd-title"><i class="ti ti-x" style="font-size:14px;"></i>Not this</div>
+      <div class="dd-item"><i class="ti ti-x" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Process an invoice that has not been approved</div>
+      <div class="dd-item"><i class="ti ti-x" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Wait for a late invoice before processing payroll</div>
+      <div class="dd-item"><i class="ti ti-x" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Manually calculate hours from the invoice</div>
+      <div class="dd-item"><i class="ti ti-x" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Add a prior-week correction into this week's master sheet row</div>
+      <div class="dd-item"><i class="ti ti-x" style="font-size:13px;flex-shrink:0;margin-top:1px;"></i>Apply overtime to any employee who is not an electrician</div>
+    </div>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-tag">The golden rule</div>
+  <div class="callout-body">"If the invoice is not in the inbox by Monday morning, 38 hours gets paid. Full stop. No chasing, no waiting, no exceptions. If they submit late, we correct it the following week — through the accounts email, never in the master sheet."</div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-help-circle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Knowledge check</div>
+  </div>
+  <div class="quiz">
+    <div class="quiz-hdr"><i class="ti ti-writing" style="font-size:13px;"></i>3 questions</div>
+    <div class="q" id="q1">
+      <div class="q-text">An electrician's invoice arrives Tuesday morning — one day late. What do you do?</div>
+      <button class="opt" onclick="ans('q1',0,1)">Process it now — the hours are still valid</button>
+      <button class="opt" onclick="ans('q1',1,1)">Apply 38h this week. Include a correction in next week's accounts email if additional hours are owed</button>
+      <button class="opt" onclick="ans('q1',2,1)">Contact Luke to get approval, then process it</button>
+      <div class="fb" id="q1-fb"></div>
+    </div>
+    <div class="q" id="q2">
+      <div class="q-text">An approved invoice shows 52 hours worked. What do you record?</div>
+      <button class="opt" onclick="ans('q2',0,2)">38 hours — the standard minimum</button>
+      <button class="opt" onclick="ans('q2',1,2)">45 hours — average of 38 and 52</button>
+      <button class="opt" onclick="ans('q2',2,2)">52 hours — the approved amount</button>
+      <div class="fb" id="q2-fb"></div>
+    </div>
+    <div class="q" id="q3">
+      <div class="q-text">Last week you paid an electrician 38h. Their late invoice just arrived — they worked 44h. What is the correct next step?</div>
+      <button class="opt" onclick="ans('q3',0,2)">Add 6 extra hours to this week's master sheet row</button>
+      <button class="opt" onclick="ans('q3',1,2)">Do nothing — the deadline has passed</button>
+      <button class="opt" onclick="ans('q3',2,2)">Include a correction in this week's accounts email: name, week, 6 additional hours, reason</button>
+      <div class="fb" id="q3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var rules = [
+  {name:"Worked days", tag:"Standard deduction", detail:"All worked days have a 0.5-hour unpaid lunch deducted. This applies to every ordinary working day.", example:"Worked 8.5h on site — 8.0h payable"},
+  {name:"Ordinary hours cap", tag:"38h per week maximum", detail:"Ordinary time is capped at 38 hours per week. Hours above 38 attract penalty rates.", example:"Worked 40h — 38h ordinary + 2h at overtime rate"},
+  {name:"Overtime — over 38h/week", tag:"Time and a half (1.5x)", detail:"Any hours worked beyond 38 in a week are paid at 1.5x the standard hourly rate. Electricians are the ONLY employee group eligible for overtime.", example:"4 hours above 38h — paid at 4 x 1.5 = 6 equivalent ordinary hours"},
+  {name:"Overtime — over 9.6h/day", tag:"Double time (2.0x)", detail:"Any hours worked beyond 9.6 in a single day are paid at 2x the standard rate. Only applies if the weekly total also exceeds 38h.", example:"Worked 11h in one day — first 9.6h at 1.5x, last 1.4h at 2.0x"},
+  {name:"Public holidays", tag:"7.6h paid — fixed", detail:"Public holidays are always paid at exactly 7.6 hours. No lunch deduction. No overtime applies.", example:"Public holiday Monday — 7.6h paid automatically"},
+  {name:"TAFE days", tag:"7.6h paid — fixed", detail:"TAFE days are recorded at 7.6 hours fixed. No lunch deduction. No overtime applies.", example:"TAFE Wednesday — 7.6h paid, not included in overtime calculation"},
+  {name:"RDO days", tag:"0.0h paid", detail:"Rostered Day Off days are recorded as 0.0 hours.", example:"RDO Friday — 0h recorded for that day"},
+  {name:"Minimum weekly hours", tag:"38h floor", detail:"If an electrician worked fewer than 38 ordinary hours in the week, they are still paid 38 hours.", example:"Worked 35h in the week — paid 38h regardless"}
+];
+
+var maxInvoices = 20;
+
+function buildRules() {
+  var c = document.getElementById('copilot-rules');
+  rules.forEach(function(r, i) {
+    var row = document.createElement('div');
+    row.className = 'rule-row';
+    row.innerHTML = '<div class="rule-left"><div class="rule-name">' + r.name + '</div><div class="rule-tag">' + r.tag + '</div></div><div class="rule-expand" id="rc' + i + '"><i class="ti ti-chevron-down"></i></div>';
+    var d = document.createElement('div');
+    d.className = 'rule-detail';
+    d.id = 'rd' + i;
+    d.innerHTML = r.detail + '<div class="rule-example"><strong>Example:</strong> ' + r.example + '</div>';
+    row.onclick = function() {
+      var o = d.classList.toggle('open');
+      document.getElementById('rc' + i).innerHTML = o ? '<i class="ti ti-chevron-up"></i>' : '<i class="ti ti-chevron-down"></i>';
+    };
+    c.appendChild(row);
+    c.appendChild(d);
+  });
+}
+
+function updateScenario(val) {
+  val = parseInt(val);
+  document.getElementById('inv-val').textContent = val;
+  var el = document.getElementById('inv-scenario');
+  var bg, sc, st, body, actions;
+
+  if (val >= maxInvoices) {
+    bg = 'background:#F0FDF4;border:1px solid #86EFAC;';
+    sc = 'color:#166534;';
+    st = 'All invoices received';
+    body = 'All invoices are in. Process each one through Copilot and enter calculated hours into all green rows.';
+    actions = [
+      {n:1, c:'#0F6E56', bg:'#CCFBF1', t:'Save all invoices to the ShareDrive folder for this week'},
+      {n:2, c:'#0F6E56', bg:'#CCFBF1', t:'Run each through Copilot — confirm Resinc rules are applied'},
+      {n:3, c:'#0F6E56', bg:'#CCFBF1', t:'Confirm manager approval (Luke or Aidan) before entering hours'},
+      {n:4, c:'#0F6E56', bg:'#CCFBF1', t:'Enter calculated hours into all green rows — no row blank'}
+    ];
+  } else if (val >= Math.round(maxInvoices * 0.7)) {
+    var missing = maxInvoices - val;
+    bg = 'background:#FFFBEB;border:1px solid #FDE68A;';
+    sc = 'color:#92400E;';
+    st = val + ' received — ' + missing + ' missing';
+    body = 'Most invoices arrived. Process the ones you have through Copilot. Apply 38h default to the ' + missing + ' missing.';
+    actions = [
+      {n:1, c:'#854F0B', bg:'#FEF9C3', t:'Save received invoices to the ShareDrive folder'},
+      {n:2, c:'#854F0B', bg:'#FEF9C3', t:'Process received invoices through Copilot'},
+      {n:3, c:'#854F0B', bg:'#FEF9C3', t:'Record 38h for each of the ' + missing + ' missing — note their names'},
+      {n:4, c:'#854F0B', bg:'#FEF9C3', t:'Do not delay payroll — process now'}
+    ];
+  } else if (val >= 1) {
+    var missing2 = maxInvoices - val;
+    bg = 'background:#FEF2F2;border:1px solid #FECACA;';
+    sc = 'color:#991B1B;';
+    st = val + ' received — ' + missing2 + ' missing';
+    body = 'High number missing this week. Process what you have, apply 38h to all ' + missing2 + ' missing. Finance does not chase invoices.';
+    actions = [
+      {n:1, c:'#A32D2D', bg:'#FCEBEB', t:'Save received invoices to the ShareDrive folder'},
+      {n:2, c:'#A32D2D', bg:'#FCEBEB', t:'Process received invoices through Copilot'},
+      {n:3, c:'#A32D2D', bg:'#FCEBEB', t:'Record 38h for all ' + missing2 + ' missing — note all names'},
+      {n:4, c:'#A32D2D', bg:'#FCEBEB', t:'Do NOT contact electricians or delay payroll'}
+    ];
+  } else {
+    bg = 'background:#FEF2F2;border:1px solid #FECACA;';
+    sc = 'color:#991B1B;';
+    st = 'No invoices received';
+    body = 'Zero invoices this week. Same process: record 38h for every electrician, note all names. Payroll runs as normal.';
+    actions = [
+      {n:1, c:'#A32D2D', bg:'#FCEBEB', t:'Record 38h for every electrician in the master sheet'},
+      {n:2, c:'#A32D2D', bg:'#FCEBEB', t:'Note all names for potential corrections next week'},
+      {n:3, c:'#A32D2D', bg:'#FCEBEB', t:'Do not delay payroll — process continues as normal'}
+    ];
+  }
+
+  var ah = actions.map(function(a) {
+    return '<div class="action-item"><div class="action-num" style="background:' + a.bg + ';color:' + a.c + '">' + a.n + '</div><div style="color:#1A202C;line-height:1.5;">' + a.t + '</div></div>';
+  }).join('');
+  el.setAttribute('style', bg + 'padding:1rem 1.1rem;border-radius:8px;');
+  el.innerHTML = '<div class="scenario-status" style="' + sc + '">' + st + '</div><div class="scenario-body">' + body + '</div><div class="scenario-actions">' + ah + '</div>';
+}
+
+var feedback = {
+  q1: {0:"Once Monday morning passes the invoice is a late submission. 38h is applied and corrections go through the accounts email next week.", 1:"Correct. The Monday deadline is firm. 38h this cycle, correction via accounts email next week — never in the master sheet.", 2:"The approval question only applies when processing received invoices. A late invoice is not processed — 38h is applied."},
+  q2: {0:"The 38h minimum only applies when fewer than 38h were worked. When an approved invoice shows more, you record the approved amount.", 1:"Never average the hours. Record exactly what the approved invoice shows.", 2:"Correct. Electricians are the only group eligible for overtime. Record 52h exactly."},
+  q3: {0:"Never add corrections directly into the master sheet. This would overpay the electrician for the current week.", 1:"If they submit voluntarily, Finance does process the correction — through the accounts email.", 2:"Correct. Prior-week corrections always go in the accounts email — name, week, additional hours, reason. Never in the current week's master sheet."}
+};
+
+function ans(qid, idx, correct) {
+  var opts = document.querySelectorAll('#' + qid + ' .opt');
+  opts.forEach(function(o) { o.disabled = true; });
+  opts[correct].classList.add('correct');
+  if (idx !== correct) opts[idx].classList.add('wrong');
+  var fb = document.getElementById(qid + '-fb');
+  fb.textContent = (idx === correct ? 'Correct. ' : 'Not quite — correct answer highlighted. ') + feedback[qid][idx];
+  fb.className = 'fb show ' + (idx === correct ? 'ok' : 'bad');
+}
+
+buildRules();
+updateScenario(16);
+</script>
+</body>
+</html>
