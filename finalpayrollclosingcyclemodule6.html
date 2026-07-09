@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll Onboarding — Module 6 | RESINC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#F8FAFB;color:#1A202C;padding:0 0 3rem;}
+.hero{background:#0A3542;padding:1.75rem 1.5rem 2rem;}
+.hero-tag{background:rgba(0,174,239,.2);color:#00AEEF;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:10px;border:1px solid rgba(0,174,239,.3);}
+.hero-title{color:#fff;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+.hero-sub{color:rgba(255,255,255,.55);font-size:13px;line-height:1.5;}
+.vid-row{background:#fff;border-bottom:1px solid #E8EDF2;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.vid-play{width:42px;height:42px;border-radius:50%;background:#00AEEF;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:none;cursor:pointer;}
+.vid-title{font-size:14px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.vid-sub{font-size:12px;color:#8899AA;}
+.body{padding:1.5rem;}
+.sec{margin-bottom:2rem;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.4rem;}
+.sec-icon{width:30px;height:30px;border-radius:8px;background:#0A3542;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sec-title{font-size:15px;font-weight:700;color:#0A3542;}
+.sec-sub{font-size:13px;color:#6B7E8F;margin-bottom:1rem;padding-left:40px;}
+.div{border:none;border-top:1px solid #E8EDF2;margin:2rem 0;}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin-bottom:1rem;}
+.tl-row{display:flex;gap:0;margin-bottom:0;}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:44px;flex-shrink:0;}
+.tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.tl-dot-blue{background:#EBF5FF;border:2px solid #B5D4F4;color:#185FA5;}
+.tl-dot-green{background:#ECFDF5;border:2px solid #6EE7B7;color:#065F46;}
+.tl-dot-amber{background:#FFFBEB;border:2px solid #FDE68A;color:#92400E;}
+.tl-dot-done{background:#0A3542;border:2px solid #0A3542;color:#00AEEF;}
+.tl-line{width:2px;background:#E8EDF2;flex:1;min-height:12px;margin:2px 0;}
+.tl-row:last-child .tl-line{display:none;}
+.tl-right{flex:1;padding:0 0 20px 12px;}
+.tl-day{font-size:10px;font-weight:700;color:#8899AA;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;padding-top:8px;}
+.tl-title{font-size:13.5px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.tl-desc{font-size:12.5px;color:#6B7E8F;line-height:1.5;}
+.tl-deadline{display:inline-flex;align-items:center;gap:5px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;color:#92400E;margin-top:5px;}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+.check-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#fff;border:1px solid #E8EDF2;border-radius:8px;cursor:pointer;transition:all .15s;}
+.check-item:hover{border-color:#B5D4F4;}
+.check-item.checked{background:#ECFDF5;border-color:#6EE7B7;}
+.check-box{width:20px;height:20px;border-radius:4px;border:1.5px solid #CBD5E0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s;}
+.check-item.checked .check-box{background:#10B981;border-color:#10B981;}
+.check-text{font-size:13px;color:#0A3542;line-height:1.4;}
+.check-item.checked .check-text{color:#065F46;}
+.check-progress{background:#E8EDF2;border-radius:999px;height:4px;margin-bottom:10px;overflow:hidden;}
+.check-fill{background:#10B981;height:100%;border-radius:999px;transition:width .3s;}
+.check-count{font-size:11px;color:#8899AA;margin-bottom:8px;}
+
+/* EMAIL FIELDS */
+.email-fields{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
+.email-field{border:1px solid #E8EDF2;border-radius:8px;padding:10px 12px;background:#fff;}
+.ef-label{font-size:10px;font-weight:700;color:#8899AA;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.ef-val{font-size:13px;color:#0A3542;line-height:1.4;}
+.ef-note{font-size:11.5px;color:#6B7E8F;margin-top:3px;}
+
+/* WARN */
+.warn-box{border-radius:10px;padding:.9rem 1rem;margin-bottom:.75rem;border-left:3px solid;}
+.warn-red{background:#FEF2F2;border-color:#EF4444;}
+.warn-red .warn-label{color:#991B1B;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.warn-red .warn-text{font-size:12.5px;color:#7F1D1D;line-height:1.6;}
+.warn-orange{background:#FFFBEB;border-color:#F59E0B;}
+.warn-orange .warn-label{color:#B45309;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.warn-orange .warn-text{font-size:12.5px;color:#78350F;line-height:1.6;}
+
+/* QUIZ */
+.quiz{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;background:#fff;}
+.quiz-hdr{background:#F8FAFB;padding:.65rem 1rem;font-size:11px;font-weight:700;color:#6B7E8F;display:flex;align-items:center;gap:7px;border-bottom:1px solid #E8EDF2;text-transform:uppercase;letter-spacing:.5px;}
+.q{padding:.9rem 1rem;border-bottom:1px solid #E8EDF2;}
+.q:last-child{border-bottom:none;}
+.q-text{font-size:14px;color:#0A3542;font-weight:600;margin-bottom:9px;line-height:1.4;}
+.opt{display:block;width:100%;text-align:left;background:#F8FAFB;border:1px solid #E8EDF2;border-radius:8px;padding:9px 12px;margin-bottom:5px;font-size:13px;color:#0A3542;cursor:pointer;font-family:inherit;transition:all .15s;}
+.opt:hover:not(:disabled){background:#EBF5FF;border-color:#B5D4F4;}
+.opt.correct{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;font-weight:600;}
+.opt.wrong{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
+.opt:disabled{cursor:default;}
+.fb{font-size:12px;margin-top:7px;padding:7px 10px;border-radius:7px;display:none;line-height:1.5;}
+.fb.show{display:block;}
+.fb.ok{background:#ECFDF5;color:#065F46;}
+.fb.bad{background:#FEF2F2;color:#991B1B;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Payroll onboarding</div>
+  <div class="hero-title">Closing the cycle</div>
+  <div class="hero-sub">Tuesday through Friday. From sending the master sheet to accounts through to salaries landing. This is the final stretch — every step has a hard deadline.</div>
+</div>
+
+</div>
+
+<div class="body">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-calendar-time" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">What happens and when</div>
+  </div>
+  <div class="sec-sub">Four days, four owners. Every step depends on the one before it.</div>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot tl-dot-blue"><i class="ti ti-send" style="font-size:14px;"></i></div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-day">Tuesday</div>
+        <div class="tl-title">Cheene sends master sheet to accounts</div>
+        <div class="tl-desc">All sections must be complete. Attach the master sheet and super forms for any new starters. Use the payroll email template.</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot tl-dot-amber"><i class="ti ti-report-money" style="font-size:14px;"></i></div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-day">Wednesday</div>
+        <div class="tl-title">Accounts review, add PAYG + super, load Xero</div>
+        <div class="tl-desc">Accounts adds PAYG and superannuation, resolves leave balance queries, loads all data into Xero, generates the ABA batch file, and sends it back to Jacqui.</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot tl-dot-blue"><i class="ti ti-upload" style="font-size:14px;"></i></div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-day">Thursday AM</div>
+        <div class="tl-title">Jacqui compares figures and uploads to Commonwealth Bank</div>
+        <div class="tl-desc">Jacqui compares the ABA batch file against the master sheet. If figures match, she uploads the batch file to Commonwealth Bank and notifies Leigh.</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot tl-dot-amber"><i class="ti ti-check" style="font-size:14px;"></i></div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-day">Thursday</div>
+        <div class="tl-title">Leigh approves in Commonwealth Bank</div>
+        <div class="tl-desc">Leigh reviews and approves the payment.</div>
+        <div class="tl-deadline"><i class="ti ti-clock" style="font-size:12px;"></i>Before 4pm Thursday — hard deadline</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot tl-dot-done"><i class="ti ti-check" style="font-size:14px;"></i></div></div>
+      <div class="tl-right">
+        <div class="tl-day">Friday</div>
+        <div class="tl-title">Salaries land in employee accounts</div>
+        <div class="tl-desc">No fixed time. Cycle complete.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-checklist" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Pre-send checklist — tick each item</div>
+  </div>
+  <div class="sec-sub">Complete every item before sending the master sheet to accounts. Accounts cannot process an incomplete sheet.</div>
+  <div class="check-count" id="check-count">0 of 7 complete</div>
+  <div class="check-progress"><div class="check-fill" id="check-fill" style="width:0%"></div></div>
+  <div class="checklist" id="checklist"></div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-mail" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Email to accounts — what to include</div>
+  </div>
+  <div class="sec-sub">Open the payroll email template and update these fields manually before sending.</div>
+  <div class="email-fields">
+    <div class="email-field">
+      <div class="ef-label">Annual and sick leave for GMs</div>
+      <div class="ef-val">Current week's leave for General Managers</div>
+      <div class="ef-note">GMs are not in the master sheet — their leave must be communicated separately in the email.</div>
+    </div>
+    <div class="email-field">
+      <div class="ef-label">Contract changes</div>
+      <div class="ef-val">Any pay rate changes or contract updates effective this week</div>
+      <div class="ef-note">Include employee name, old rate, new rate, and effective date.</div>
+    </div>
+    <div class="email-field">
+      <div class="ef-label">New employee details</div>
+      <div class="ef-val">Full name and start date for anyone starting this cycle</div>
+      <div class="ef-note">Even if already added to the master sheet — confirm in the email too.</div>
+    </div>
+    <div class="email-field">
+      <div class="ef-label">Terminated employee details</div>
+      <div class="ef-val">Full name, last working date, and reason (dismissal or voluntary)</div>
+      <div class="ef-note">Include even if the row is already marked red in the master sheet.</div>
+    </div>
+    <div class="email-field">
+      <div class="ef-label">Prior-week corrections (if any)</div>
+      <div class="ef-val">List each correction separately — employee name, week it relates to, adjustment amount, reason</div>
+      <div class="ef-note">Always at the end of the email, clearly separated from current week figures. Never add corrections directly to the master sheet.</div>
+    </div>
+  </div>
+  <div class="warn-red">
+    <div class="warn-label">Do not send until complete</div>
+    <div class="warn-text">Do not send the email until all sections of the master sheet have been completed. Accounts cannot process an incomplete sheet — and an incomplete submission puts the Thursday deadline at risk.</div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-alert-triangle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">If something goes wrong</div>
+  </div>
+  <div class="sec-sub">Three scenarios — know what to do before they happen.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+
+    <div style="border-radius:14px;overflow:hidden;border:1px solid #FECACA;">
+      <div style="background:#FEF2F2;padding:1rem 1.25rem;display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="ti ti-user-x" style="font-size:22px;color:#991B1B;"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#991B1B;margin-bottom:2px;">Leigh unavailable Thursday</div>
+          <div style="font-size:14px;font-weight:700;color:#7F1D1D;">Payment cannot be approved before 4pm</div>
+        </div>
+        <div style="background:#FEE2E2;border-radius:8px;padding:6px 12px;text-align:center;flex-shrink:0;">
+          <div style="font-size:10px;font-weight:700;color:#991B1B;text-transform:uppercase;letter-spacing:.5px;">Action</div>
+          <div style="font-size:13px;font-weight:700;color:#7F1D1D;">Contact Jacqui</div>
+        </div>
+      </div>
+      <div style="background:#fff;padding:.85rem 1.25rem;font-size:12.5px;color:#4A5568;line-height:1.6;border-top:1px solid #FECACA;">
+        Contact Jacqui immediately — do not submit the payment without an authorised approver. Even a short delay is better than submitting without approval.
+      </div>
+    </div>
+
+    <div style="border-radius:14px;overflow:hidden;border:1px solid #FDE68A;">
+      <div style="background:#FFFBEB;padding:1rem 1.25rem;display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="ti ti-building-bank" style="font-size:22px;color:#92400E;"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#92400E;margin-bottom:2px;">Payment error after submission</div>
+          <div style="font-size:14px;font-weight:700;color:#78350F;">Commonwealth Bank flags an issue</div>
+        </div>
+        <div style="background:#FEF3C7;border-radius:8px;padding:6px 12px;text-align:center;flex-shrink:0;">
+          <div style="font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.5px;">Action</div>
+          <div style="font-size:13px;font-weight:700;color:#78350F;">Contact Jacqui</div>
+        </div>
+      </div>
+      <div style="background:#fff;padding:.85rem 1.25rem;font-size:12.5px;color:#4A5568;line-height:1.6;border-top:1px solid #FDE68A;">
+        Jacqui receives an email notification from Commonwealth Bank (e.g. BSB and account number do not match). She contacts the employee to confirm correct bank details, updates Xero, then processes a fast payment Saturday if urgent — or Monday if not.
+      </div>
+    </div>
+
+    <div style="border-radius:14px;overflow:hidden;border:1px solid #C7D2FE;">
+      <div style="background:#EEF2FF;padding:1rem 1.25rem;display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:#E0E7FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="ti ti-clock-x" style="font-size:22px;color:#3730A3;"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#3730A3;margin-bottom:2px;">Accounts sheet not returned</div>
+          <div style="font-size:14px;font-weight:700;color:#1E1B4B;">No sheet back from accounts by Wednesday</div>
+        </div>
+        <div style="background:#E0E7FF;border-radius:8px;padding:6px 12px;text-align:center;flex-shrink:0;">
+          <div style="font-size:10px;font-weight:700;color:#3730A3;text-transform:uppercase;letter-spacing:.5px;">Action</div>
+          <div style="font-size:13px;font-weight:700;color:#1E1B4B;">Follow up now</div>
+        </div>
+      </div>
+      <div style="background:#fff;padding:.85rem 1.25rem;font-size:12.5px;color:#4A5568;line-height:1.6;border-top:1px solid #C7D2FE;">
+        Follow up with accounts immediately — Wednesday is the last day before the Thursday upload deadline. Do not wait to see if it arrives. If no response, escalate to Jacqui.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-help-circle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Knowledge check</div>
+  </div>
+  <div class="quiz">
+    <div class="quiz-hdr"><i class="ti ti-writing" style="font-size:13px;"></i>3 questions</div>
+    <div class="q" id="q1">
+      <div class="q-text">The master sheet has a blank row for an active employee. Can you send it to accounts?</div>
+      <button class="opt" onclick="ans('q1',0,1)">Yes — accounts will fill in the missing data</button>
+      <button class="opt" onclick="ans('q1',1,1)">No — every active employee row must be complete before sending</button>
+      <button class="opt" onclick="ans('q1',2,1)">Only if it's a new starter</button>
+      <div class="fb" id="q1-fb"></div>
+    </div>
+    <div class="q" id="q2">
+      <div class="q-text">Leigh is unavailable Friday morning and hasn't approved the payment. What do you do?</div>
+      <button class="opt" onclick="ans('q2',0,1)">Execute the payment — it's already been prepared correctly</button>
+      <button class="opt" onclick="ans('q2',1,1)">Escalate to Jacqui immediately — do not execute without an authorised approver</button>
+      <button class="opt" onclick="ans('q2',2,1)">Wait until Leigh is available, even if it takes until the afternoon</button>
+      <div class="fb" id="q2-fb"></div>
+    </div>
+    <div class="q" id="q3">
+      <div class="q-text">An electrician submitted their invoice late — from last week. Where do you include the correction?</div>
+      <button class="opt" onclick="ans('q3',0,2)">Add the extra hours to this week's master sheet row</button>
+      <button class="opt" onclick="ans('q3',1,2)">Do nothing until next cycle</button>
+      <button class="opt" onclick="ans('q3',2,2)">In the accounts email — clearly listed with name, week, additional hours, and reason</button>
+      <div class="fb" id="q3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var checkItems=[
+  "All employee rows are present and correctly colour coded",
+  "Absence hours are entered and column 7 reflects the correct deductions",
+  "Paid hours in column 15 match each employee's contracted hours",
+  "All bonus and commission amounts are entered",
+  "Allowances and pre-tax deductions are correct",
+  "New starters are included with full details",
+  "Terminated employees are marked in red",
+];
+var checked={};
+
+function buildChecklist(){
+  var el=document.getElementById('checklist');
+  checkItems.forEach(function(item,i){
+    var div=document.createElement('div');div.className='check-item';
+    div.innerHTML='<div class="check-box" id="cb'+i+'"></div><div class="check-text">'+item+'</div>';
+    div.onclick=function(){
+      checked[i]=!checked[i];
+      div.classList.toggle('checked',checked[i]);
+      var box=document.getElementById('cb'+i);
+      box.innerHTML=checked[i]?'<i class="ti ti-check" style="font-size:12px;color:white;"></i>':'';
+      updateProgress();
+    };
+    el.appendChild(div);
+  });
+}
+
+function updateProgress(){
+  var total=checkItems.length;
+  var done=Object.values(checked).filter(Boolean).length;
+  document.getElementById('check-count').textContent=done+' of '+total+' complete';
+  document.getElementById('check-fill').style.width=(done/total*100)+'%';
+}
+
+var feedback={
+  q1:{0:"Accounts cannot fill in missing data — they can only work with what's in the sheet. An incomplete row will cause payment errors.",1:"Correct. Every active employee row must be complete before the sheet goes to accounts. No blank rows.",2:"New starters need complete rows too — employment type, rate, and colour coding must all be present."},
+  q2:{0:"The payment must not be executed without Leigh's approval — even if everything else is correct.",1:"Correct. Escalate to Jacqui immediately. Never execute the payment without an authorised approver.",2:"There is no time to wait — the 4pm deadline means you need to escalate immediately, not wait for Leigh."},
+  q3:{0:"Never add corrections to the current week's master sheet row — this would overpay the electrician for the current week.",1:"Finance does not chase late invoices. If the electrician submits late, the correction is processed in the next cycle after receiving it — through the accounts email.",2:"Correct. Prior-week corrections always go in the accounts email — name, week, additional hours, and reason. Never in the master sheet."},
+};
+
+function ans(qid,idx,correct){
+  var opts=document.querySelectorAll('#'+qid+' .opt');
+  opts.forEach(function(o){o.disabled=true;});
+  opts[correct].classList.add('correct');
+  if(idx!==correct)opts[idx].classList.add('wrong');
+  var fb=document.getElementById(qid+'-fb');
+  fb.textContent=(idx===correct?'Correct. ':'Not quite — correct answer highlighted. ')+feedback[qid][idx];
+  fb.className='fb show '+(idx===correct?'ok':'bad');
+}
+
+buildChecklist();
+</script>
+</body>
+</html>
