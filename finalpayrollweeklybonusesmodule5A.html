@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll Onboarding — Module 5A | RESINC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#F8FAFB;color:#1A202C;padding:0 0 3rem;}
+.hero{background:#0A3542;padding:1.75rem 1.5rem 2rem;}
+.hero-tag{background:rgba(0,174,239,.2);color:#00AEEF;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:10px;border:1px solid rgba(0,174,239,.3);}
+.hero-title{color:#fff;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+.hero-sub{color:rgba(255,255,255,.55);font-size:13px;line-height:1.5;}
+.vid-row{background:#fff;border-bottom:1px solid #E8EDF2;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.vid-play{width:42px;height:42px;border-radius:50%;background:#00AEEF;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:none;cursor:pointer;}
+.vid-title{font-size:14px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.vid-sub{font-size:12px;color:#8899AA;}
+.body{padding:1.5rem;}
+.sec{margin-bottom:2rem;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.4rem;}
+.sec-icon{width:30px;height:30px;border-radius:8px;background:#0A3542;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sec-title{font-size:15px;font-weight:700;color:#0A3542;}
+.sec-sub{font-size:13px;color:#6B7E8F;margin-bottom:1rem;padding-left:40px;}
+.div{border:none;border-top:1px solid #E8EDF2;margin:2rem 0;}
+
+.flow{display:flex;flex-direction:column;gap:0;border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;margin-bottom:1rem;}
+.flow-row{display:flex;align-items:stretch;border-bottom:1px solid #E8EDF2;cursor:pointer;background:#fff;transition:background .12s;}
+.flow-row:last-child{border-bottom:none;}
+.flow-row:hover{background:#F7FAFC;}
+.flow-row.active{background:#EBF8FF;}
+.flow-num{width:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#B5D4F4;border-right:1px solid #E8EDF2;}
+.flow-row.active .flow-num{color:#185FA5;}
+.flow-content{flex:1;padding:10px 14px;}
+.flow-title{font-size:13px;font-weight:600;color:#0A3542;margin-bottom:2px;}
+.flow-meta{font-size:11.5px;color:#8899AA;}
+.flow-chevron{width:36px;display:flex;align-items:center;justify-content:center;color:#CBD5E0;font-size:15px;transition:transform .2s;}
+.flow-row.active .flow-chevron{transform:rotate(180deg);color:#185FA5;}
+.flow-detail{padding:10px 14px 12px 58px;border-top:1px solid #BAE6FD;font-size:12.5px;color:#0A3542;line-height:1.6;display:none;background:#EBF8FF;}
+.flow-detail.open{display:block;}
+
+.warn-box{border-radius:10px;padding:.9rem 1rem;margin-bottom:1rem;border-left:3px solid;}
+.warn-orange{background:#FFFBEB;border-color:#F59E0B;}
+.warn-orange .warn-label{color:#B45309;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.warn-orange .warn-text{font-size:12.5px;color:#78350F;line-height:1.6;}
+.warn-red{background:#FEF2F2;border-color:#EF4444;}
+.warn-red .warn-label{color:#991B1B;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.warn-red .warn-text{font-size:12.5px;color:#7F1D1D;line-height:1.6;}
+
+.approver-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:1rem;}
+.approver-card{border:1px solid #E8EDF2;border-radius:10px;padding:1rem;background:#fff;}
+.approver-role{font-size:10px;font-weight:700;color:#8899AA;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.approver-name{font-size:14px;font-weight:700;color:#0A3542;margin-bottom:2px;}
+.approver-desc{font-size:12px;color:#6B7E8F;line-height:1.4;}
+.approver-badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;margin-top:6px;}
+.badge-sends{background:#EBF5FF;color:#185FA5;}
+.badge-approves{background:#F0FDF4;color:#166534;}
+.badge-indicator{background:#FEF2F2;color:#991B1B;}
+
+.quiz{border:1px solid #E8EDF2;border-radius:12px;overflow:hidden;background:#fff;}
+.quiz-hdr{background:#F8FAFB;padding:.65rem 1rem;font-size:11px;font-weight:700;color:#6B7E8F;display:flex;align-items:center;gap:7px;border-bottom:1px solid #E8EDF2;text-transform:uppercase;letter-spacing:.5px;}
+.q{padding:.9rem 1rem;border-bottom:1px solid #E8EDF2;}
+.q:last-child{border-bottom:none;}
+.q-text{font-size:14px;color:#0A3542;font-weight:600;margin-bottom:9px;line-height:1.4;}
+.opt{display:block;width:100%;text-align:left;background:#F8FAFB;border:1px solid #E8EDF2;border-radius:8px;padding:9px 12px;margin-bottom:5px;font-size:13px;color:#0A3542;cursor:pointer;font-family:inherit;transition:all .15s;}
+.opt:hover:not(:disabled){background:#EBF5FF;border-color:#B5D4F4;}
+.opt.correct{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;font-weight:600;}
+.opt.wrong{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
+.opt:disabled{cursor:default;}
+.fb{font-size:12px;margin-top:7px;padding:7px 10px;border-radius:7px;display:none;line-height:1.5;}
+.fb.show{display:block;}
+.fb.ok{background:#ECFDF5;color:#065F46;}
+.fb.bad{background:#FEF2F2;color:#991B1B;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Payroll onboarding</div>
+  <div class="hero-title">Weekly bonuses — connectors &amp; confirmers</div>
+  <div class="hero-sub">Every Monday AM, after electrician invoices. Wait for the approval email from Casey or Jordan before entering anything.</div>
+</div>
+
+</div>
+
+<div class="body">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-users" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Who's involved</div>
+  </div>
+  <div class="sec-sub">Three people — two who send, one who approves. You need all three before processing.</div>
+  <div class="approver-grid">
+    <div class="approver-card">
+      <div class="approver-role">Sends bonus email</div>
+      <div class="approver-name">Casey</div>
+      <div class="approver-desc">Sends the weekly bonus amounts for the connectors & confirmers team</div>
+      <span class="approver-badge badge-sends">Sends email</span>
+    </div>
+    <div class="approver-card">
+      <div class="approver-role">Sends bonus email</div>
+      <div class="approver-name">Jordan</div>
+      <div class="approver-desc">Also sends weekly bonus amounts — one or the other sends each week</div>
+      <span class="approver-badge badge-sends">Sends email</span>
+    </div>
+    <div class="approver-card">
+      <div class="approver-role">Approves</div>
+      <div class="approver-name">Stacey</div>
+      <div class="approver-desc">Must approve the bonus amounts before payroll can enter them</div>
+      <span class="approver-badge badge-approves">Approves</span>
+    </div>
+    <div class="approver-card">
+      <div class="approver-role">Bonus indicator</div>
+      <div class="approver-name">Red indicator</div>
+      <div class="approver-desc">Only employees with the red bonus indicator in the master sheet can receive a weekly bonus</div>
+      <span class="approver-badge badge-indicator">Required</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-list-numbers" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Process steps — click each one</div>
+  </div>
+  <div class="sec-sub">12 steps across the master sheet and the connectors/confirmers sheet.</div>
+  <div class="flow" id="flow"></div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-alert-triangle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Critical rules</div>
+  </div>
+  <div class="warn-box warn-red">
+    <div class="warn-label">Do not enter without approval</div>
+    <div class="warn-text">Do not enter bonus amounts for employees who do not have the red bonus indicator on the master sheet — even if they appear in the bonus email. If someone appears in the email but not on the indicator list, confirm with the relevant manager before proceeding.</div>
+  </div>
+  <div class="warn-box warn-orange">
+    <div class="warn-label">Wait for Stacey's approval</div>
+    <div class="warn-text">The bonus email must be approved by Stacey before any amounts are entered. If you receive the email from Casey or Jordan but it has not been confirmed as approved by Stacey, do not proceed — contact Casey or Jordan to confirm.</div>
+  </div>
+  <div class="warn-box warn-orange">
+    <div class="warn-label">No email by Monday AM</div>
+    <div class="warn-text">If the bonus email has not arrived by Monday morning, contact Casey or Jordan directly. Do not assume zero bonus — always confirm before processing.</div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-icon"><i class="ti ti-help-circle" style="font-size:15px;color:#00AEEF;"></i></div>
+    <div class="sec-title">Knowledge check</div>
+  </div>
+  <div class="quiz">
+    <div class="quiz-hdr"><i class="ti ti-writing" style="font-size:13px;"></i>3 questions</div>
+    <div class="q" id="q1">
+      <div class="q-text">The bonus email arrives from Jordan on Monday. Stacey's approval is not mentioned. What do you do?</div>
+      <button class="opt" onclick="ans('q1',0,1)">Enter the amounts — Jordan sent it so it's approved</button>
+      <button class="opt" onclick="ans('q1',1,1)">Contact Jordan to confirm Stacey has approved before entering anything</button>
+      <button class="opt" onclick="ans('q1',2,1)">Enter zero bonus for everyone this week</button>
+      <div class="fb" id="q1-fb"></div>
+    </div>
+    <div class="q" id="q2">
+      <div class="q-text">An employee appears in the bonus email but does not have a red bonus indicator on the master sheet. What do you do?</div>
+      <button class="opt" onclick="ans('q2',0,0)">Enter the bonus — they're in the email so they're eligible</button>
+      <button class="opt" onclick="ans('q2',1,0)">Do not enter the bonus — confirm with the relevant manager first</button>
+      <button class="opt" onclick="ans('q2',2,0)">Skip them this week and check next cycle</button>
+      <div class="fb" id="q2-fb"></div>
+    </div>
+    <div class="q" id="q3">
+      <div class="q-text">No bonus email has arrived by Monday morning. What do you do?</div>
+      <button class="opt" onclick="ans('q3',0,2)">Enter zero bonus for everyone</button>
+      <button class="opt" onclick="ans('q3',1,2)">Copy last week's amounts as a placeholder</button>
+      <button class="opt" onclick="ans('q3',2,2)">Contact Casey or Jordan directly — do not assume zero bonus</button>
+      <div class="fb" id="q3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var steps=[
+  {n:1,title:"Confirm the bonus email has been received",meta:"From Casey or Jordan — approved by Stacey",detail:"Check the payroll inbox. The email should be from Casey or Jordan and must be approved by Stacey. Do not proceed without both."},
+  {n:2,title:"Open the connectors/confirmers master pay sheet",meta:"ShareDrive",detail:"Open the connectors/confirmers master pay sheet on ShareDrive. This is separate from the weekly pay master sheet."},
+  {n:3,title:"Confirm Cheene has duplicated the tab",meta:"Renamed with the Friday payment date — e.g. 15/5/26",detail:"Check that the tab for the current week has been duplicated and renamed with the Friday payment date. If not, duplicate it now and rename it."},
+  {n:4,title:"Clear variable data from the current week's tab",meta:"Columns H to O and Q to R, plus bonus amounts below row 8 col I",detail:"In the current week's tab, delete: bonus amounts, number of sales made, the 'added to paysheet' checkbox, paid status, and comments (columns H to O and Q to R). Also delete bonus amounts from below row 8 in column I."},
+  {n:5,title:"Enter bonus amounts from the Casey / Jordan email",meta:"For each applicable employee",detail:"Using the amounts from the bonus email, enter the weekly bonus for each applicable employee in the connectors/confirmers sheet."},
+  {n:6,title:"Confirm column K row 8 is correct",meta:"Pay amount ex tax = salary + bonus total",detail:"Check that column K, row 8 shows the correct total of salary plus bonus for each employee. This is the figure that will flow through to payment."},
+  {n:7,title:"Enter bonus amounts in the master sheet",meta:"Row 26 — red bonus indicator employees only",detail:"In the weekly pay master sheet, enter the commission amount in row 26 for each applicable employee. Only enter amounts for employees who have the red bonus indicator on their row."},
+  {n:8,title:"Open the AHD confirm costs sheet",meta:"ShareDrive",detail:"Open the AHD confirm costs sheet on ShareDrive. This sheet tracks the team's weekly cost breakdown."},
+  {n:9,title:"Add a new row for the current payment date",meta:"",detail:"Add a new row in the AHD confirm costs sheet for the current payment date."},
+  {n:10,title:"Copy the team weekly cost information",meta:"From the connectors/confirmers sheet",detail:"Copy the pay amount from the connectors/confirmers sheet into the new row in the AHD confirm costs sheet."},
+  {n:11,title:"Confirm the AH cost-share formula has calculated",meta:"",detail:"Confirm that the formula in the AHD confirm costs sheet has automatically calculated the AH cost-share amount for the week. If the formula hasn't triggered, do not manually calculate — check with Jacqui."},
+  {n:12,title:"Verify all entries before moving on",meta:"Both sheets complete",detail:"Before moving to the next process, confirm both the connectors/confirmers sheet and the master sheet have been updated correctly for all applicable employees."},
+];
+var feedback={
+  q1:{0:"The bonus email being sent by Jordan does not mean Stacey has approved it. Always confirm Stacey's approval before entering amounts.",1:"Correct. The bonus must be approved by Stacey before entry. Contact Jordan to confirm Stacey's approval first.",2:"Never assume zero bonus — always confirm before processing."},
+  q2:{0:"Not quite — the red bonus indicator is the control, not the email. An employee in the email without the indicator may have been included in error.",1:"Correct. Only employees with the red bonus indicator can receive a weekly bonus. Confirm with the manager if someone appears in the email without the indicator.",2:"Don't skip — confirm with the manager now so it can be resolved before the master sheet goes to accounts."},
+  q3:{0:"Never assume zero bonus — the email may just be delayed.",1:"Never copy prior amounts without approval — bonus amounts change week to week.",2:"Correct. Always contact Casey or Jordan directly. Do not assume zero bonus and do not delay processing without confirmation."},
+};
+function buildFlow(){
+  var el=document.getElementById('flow');
+  steps.forEach(function(s,i){
+    var row=document.createElement('div');row.className='flow-row';
+    row.innerHTML='<div class="flow-num">'+s.n+'</div><div class="flow-content"><div class="flow-title">'+s.title+'</div><div class="flow-meta">'+s.meta+'</div></div><div class="flow-chevron"><i class="ti ti-chevron-down"></i></div>';
+    var detail=document.createElement('div');detail.className='flow-detail';detail.textContent=s.detail;
+    row.onclick=function(){
+      var open=detail.classList.contains('open');
+      document.querySelectorAll('.flow-row').forEach(function(r){r.classList.remove('active');});
+      document.querySelectorAll('.flow-detail').forEach(function(d){d.classList.remove('open');});
+      if(!open){row.classList.add('active');detail.classList.add('open');}
+    };
+    el.appendChild(row);el.appendChild(detail);
+  });
+}
+function ans(qid,idx,correct){
+  var opts=document.querySelectorAll('#'+qid+' .opt');
+  opts.forEach(function(o){o.disabled=true;});
+  opts[correct].classList.add('correct');
+  if(idx!==correct)opts[idx].classList.add('wrong');
+  var fb=document.getElementById(qid+'-fb');
+  fb.textContent=(idx===correct?'Correct. ':'Not quite — correct answer highlighted. ')+feedback[qid][idx];
+  fb.className='fb show '+(idx===correct?'ok':'bad');
+}
+buildFlow();
+</script>
+</body>
+</html>
